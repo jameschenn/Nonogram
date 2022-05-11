@@ -14,13 +14,13 @@ class Dm(db.Model):
   chatroom = db.relationship('Chatroom', back_populates='dms')
   user = db.relationship('User', back_populates='dms')
 
-    def to_dict(self):
-      return {
-        'id': self.id,
-        'chatroomId': self.chatroomId,
-        'userId': self.userId,
-        'message': self.message,
-        'user': self.user.to_dict(),
-        'createdAt': self.createdAt,
-        'updatedAt': self.updatedAt
-      }
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'chatroomId': self.chatroomId,
+      'userId': self.userId,
+      'message': self.message,
+      'user': self.user.to_dict(),
+      'createdAt': self.createdAt,
+      'updatedAt': self.updatedAt
+    }

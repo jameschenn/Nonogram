@@ -6,4 +6,4 @@ from .likes import Like
 from .follows import follows
 from .chatrooms import Chatroom
 from .dms import Dm
-from users_join import users_join
+from .users_join import users_join

@@ -1,8 +1,9 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from sqlalchemy.sql import func
 from .follows import follows
+from .users_join import users_join
+from sqlalchemy.sql import func
 
 
 class User(db.Model, UserMixin):
@@ -24,16 +25,17 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', back_populates='user', cascade="all, delete")
     likes = db.relationship('Like', back_populates='user', cascade="all, delete")
     followers = db.relationship(
-        "User",
+        'User',
         secondary=follows,
         primaryjoin=(follows.c.followedId == id),
         secondaryjoin=(follows.c.followerId == id),
         backref=db.backref('following', lazy='dynamic'),
-        lazy=dynamic
+        lazy='dynamic'
     )
 
     dms = db.relationship('Dm', back_populates='user')
     chatrooms = db.relationship(
+        'Chatroom',
         secondary=users_join,
         back_populates='users'
     )

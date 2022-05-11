@@ -1,4 +1,5 @@
 from .db import db
+from .users_join import users_join
 from sqlalchemy.sql import func
 
 class Chatroom(db.Model):
@@ -11,3 +12,13 @@ class Chatroom(db.Model):
 
   dms = db.relationship('Dm', back_populates='chatroom')
   users = db.relationship('User', secondary=users_join, back_populates='chatrooms')
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'dms': [dm.to_dict() for dm in self.dms],
+      'users': [user.to_dict() for user in self.users],
+      'createdAt': self.createdAt,
+      'updatedAt': self.updatedAt
+    }
