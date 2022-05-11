@@ -12,7 +12,7 @@ class Comment(db.Model):
   updatedAt = db.Column(db.DateTime(timezone=True), server_onupdate=func.now(), server_default=func.now())
 
   user = db.relationship('User', back_populates='comments')
-  image = db.relationship('Post', back_populates='comments')
+  image = db.relationship('Image', back_populates='comments')
 
   def to_dict(self):
     return {

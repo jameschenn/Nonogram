@@ -1,8 +1,8 @@
 """nonogram
 
-Revision ID: a9cf5affb6fc
+Revision ID: 9de731fb21c0
 Revises: 
-Create Date: 2022-05-10 18:43:13.777534
+Create Date: 2022-05-10 23:25:59.503809
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a9cf5affb6fc'
+revision = '9de731fb21c0'
 down_revision = None
 branch_labels = None
 depends_on = None
