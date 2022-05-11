@@ -4,3 +4,6 @@ from .images import Image
 from .comments import Comment
 from .likes import Like
 from .follows import follows
+from .chatrooms import Chatroom
+from .dms import Dm
+from users_join import users_join

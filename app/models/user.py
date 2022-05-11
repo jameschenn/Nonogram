@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     firstName = db.Column(db.String(50), nullable=False)
-    lastName = db.Column(db.string(50), nullable=False)
+    lastName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     bio = db.Column(db.String(500), nullable=True)
@@ -30,6 +30,12 @@ class User(db.Model, UserMixin):
         secondaryjoin=(follows.c.followerId == id),
         backref=db.backref('following', lazy='dynamic'),
         lazy=dynamic
+    )
+
+    dms = db.relationship('Dm', back_populates='user')
+    chatrooms = db.relationship(
+        secondary=users_join,
+        back_populates='users'
     )
 
     @property
