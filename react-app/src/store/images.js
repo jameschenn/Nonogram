@@ -111,7 +111,7 @@ export const deleteImageThunk = id => async dispatch => {
     method: 'DELETE',
   });
   if(response.ok) {
-    dispatch(deleteImage(id))
+    dispatch(deleteImage(id));
   }
 }
 

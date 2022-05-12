@@ -10,13 +10,14 @@ const IndividualImage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams();
+  const { id } = useParams(); //image ID
 
   useEffect(() => {
     dispatch(imageActions.loadOneImageThunk(id))
     dispatch(commentActions.loadCommentsThunk(id))
   }, [dispatch, id])
 
+  const user = useSelector(state => state.session.user)
   const images = useSelector(state => state?.images)
   const imageData = images[id]
   const comments = useSelector(state => state?.comments)
@@ -32,16 +33,19 @@ const IndividualImage = () => {
         <img src={imageData?.imageUrl} alt='post'/>
       </div>
       <div className='post-info'>
-        <p>{imageData?.caption}</p>
+          <p><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{imageData?.user?.username}</span> {imageData?.caption}</p>
         {commentsData.map((comment, idx) => (
           <ul>
-            <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className="profile-icon" /> {comment.user.username} {comment.comment}</li>
-            {/* <li>{comment.comment}</li> */}
+            <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment}</li>
           </ul>
         ))}
       </div>
       <div>
         <EditImageForm imageId={imageData?.id} />
+          <button type="button" onClick={() => {
+            dispatch(imageActions.deleteImageThunk(imageData?.id))
+            history.push(`/users/${user.id}`)
+          }}>Delete</button>
       </div>
     </div>
     </>

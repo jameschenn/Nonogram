@@ -22,6 +22,7 @@ class Image(db.Model):
       'userId': self.userId,
       'imageUrl': self.imageUrl,
       'caption': self.caption,
+      'user': self.user.to_dict(),
       'likes': [like.to_dict() for like in self.likes],
       'createdAt': self.createdAt,
       'updatedAt': self.updatedAt

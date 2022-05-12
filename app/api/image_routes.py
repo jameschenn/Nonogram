@@ -25,7 +25,6 @@ def get_individual_image(id):
 @image_routes.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload_image():
-  print('BACKEND ROUTE HIT-----------------------------------------')
   form = UploadImageForm()
 
   form['csrf_token'].data = request.cookies['csrf_token']
