@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
+import EditImageForm from "../EditImage/index";
 import './IndividualImage.css';
 
 const IndividualImage = () => {
@@ -31,12 +32,16 @@ const IndividualImage = () => {
         <img src={imageData?.imageUrl} alt='post'/>
       </div>
       <div className='post-info'>
+        <p>{imageData?.caption}</p>
         {commentsData.map((comment, idx) => (
           <ul>
             <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className="profile-icon" /> {comment.user.username} {comment.comment}</li>
             {/* <li>{comment.comment}</li> */}
           </ul>
         ))}
+      </div>
+      <div>
+        <EditImageForm imageId={imageData?.id} />
       </div>
     </div>
     </>
