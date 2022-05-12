@@ -43,8 +43,8 @@ const IndividualImage = () => {
       <div>
         <EditImageForm imageId={imageData?.id} />
           <button type="button" onClick={() => {
-            dispatch(imageActions.deleteImageThunk(imageData?.id))
-            history.push(`/users/${user.id}`)
+            dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/users/${user.id}`))
+            // history.push(`/users/${user.id}`)
           }}>Delete</button>
       </div>
     </div>
