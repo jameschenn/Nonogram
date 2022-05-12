@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from "../../store/images";
 
-const EditImageForm =() => {
+const EditImageForm =({imageId}) => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const EditImageForm =() => {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
-  console.log('FROM EDIT', imageData[id].id)
+  console.log('FROM EDIT', imageData)
 
 
   useEffect(async () => {
@@ -25,10 +25,9 @@ const EditImageForm =() => {
     e.preventDefault();
 
     const payload = {
-
       caption,
     }
-    dispatch(imageActions.editImageThunk(id, payload));
+    dispatch(imageActions.editImageThunk(imageId, payload));
   }
 
   return (

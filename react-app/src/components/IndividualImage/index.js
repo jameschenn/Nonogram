@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
+import * as commentActions from '../../store/comments'
 
-const IndividualPicture = () => {
+const IndividualImage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -11,7 +12,11 @@ const IndividualPicture = () => {
 
   useEffect(() => {
     dispatch(imageActions.loadOneImageThunk(id))
+    dispatch(commentActions.loadCommentsThunk(id))
   }, [dispatch, id])
+
+  const comments = useSelector(state => state.comments)
+  console.log('----------', comments)
 
 
   return (
@@ -20,4 +25,4 @@ const IndividualPicture = () => {
 }
 
 
-export default IndividualPicture
+export default IndividualImage

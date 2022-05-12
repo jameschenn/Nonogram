@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
+import * as commentActions from '../../store/comments'
 
 const AllImages = () => {
 
   const dispatch = useDispatch()
   const history = useHistory()
+  const { id } = useParams()
 
   const sessionUser = useSelector(state => state.session.user);
   const images = useSelector(state => state.images);
   const imageData = Object.values(images)
-  console.log('1', images)
-  console.log('2',imageData)
+  const comments = useSelector(state => state.comments)
+  console.log('--------------------', comments)
 
   useEffect(async () => {
     await dispatch(imageActions.loadAllImagesThunk())
+    await dispatch(commentActions.loadCommentsThunk(id))
   }, [dispatch])
 
 

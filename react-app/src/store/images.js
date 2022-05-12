@@ -60,7 +60,7 @@ export const loadUserImagesThunk = id => async dispatch => {
 }
 
 export const loadOneImageThunk = id => async dispatch => {
-  const result = await fetch(`/api/images/${id}/image`, {
+  const result = await fetch(`/api/images/image/${id}`, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -119,7 +119,6 @@ const imagesReducer = (state = initalState, action) => {
       };
     case LOAD:
       const allImages = {};
-      console.log('action', action.images)
       action.images.images.forEach(image => {
         allImages[image.id] = image
       });
@@ -138,7 +137,6 @@ const imagesReducer = (state = initalState, action) => {
       };
     case ADD_IMAGE:
       const newImage = {};
-      console.log('ACTION FROM THE THUNK', action)
       newImage[action.image.image.id] = action.image.image;
       return {
         ...state,

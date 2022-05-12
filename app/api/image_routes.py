@@ -17,7 +17,7 @@ def get_user_images(id):
   user_images = user.images
   return { 'images': [ image.to_dict() for image in user_images ]  }
 
-@image_routes.route('/<int:id>/image')
+@image_routes.route('/image/<int:id>')
 def get_individual_image(id):
   image = Image.query.get(id)
   return { 'image': image.to_dict() }
@@ -54,7 +54,6 @@ def edit_caption(id):
 
   if form.validate_on_submit():
     image.caption = data['caption']
-    print('----------CAPTION----------', image.caption)
     db.session.commit()
     return image.to_dict()
 

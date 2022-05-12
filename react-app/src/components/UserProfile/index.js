@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
 import EditImageForm from "../EditImage/index";
+import './UserProfile.css'
 
 const UserProfile = () => {
 
@@ -21,17 +22,21 @@ const UserProfile = () => {
 
   return (
     <>
+    <div className='profile-img-container'>
       {imageData.map((image, idx) => (
         <ul>
-          <li><img src={image?.imageUrl} alt={image?.id} /></li>
+          <div className='profile-img-cards'>
+            <a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id} /></a>
+          </div>
           <li>{image?.caption}</li>
-          <EditImageForm />
+          <EditImageForm imageId={image.id} />
           <button type="button" onClick={() => {
             dispatch(imageActions.deleteImageThunk(image?.id))
             // history.push('/images')
           }}>Delete</button>
         </ul>
       ))}
+    </div>
     </>
   )
 }

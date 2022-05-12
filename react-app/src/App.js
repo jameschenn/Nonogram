@@ -11,7 +11,7 @@ import { authenticate } from './store/session';
 
 import AllImages from './components/AllImages';
 import UserProfile from './components/UserProfile'
-import IndividualPicture from './components/IndividualPicture'
+import IndividualImage from './components/IndividualImage'
 import UploadImage from './components/UploadImage';
 
 function App() {
@@ -49,12 +49,11 @@ function App() {
           <AllImages />
         </ProtectedRoute>
         <ProtectedRoute path='/images/upload' exact={true} >
-          {console.log('ROUTE HIT')}
           <UploadImage />
         </ProtectedRoute>
-        {/* <ProtectedRoute path ='users/:id/image' exact={true} >
-          <IndividualPicture />
-        </ProtectedRoute> */}
+        <ProtectedRoute path ='/images/:id' exact={true} >
+          <IndividualImage />
+        </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>
