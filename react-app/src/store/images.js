@@ -1,7 +1,8 @@
 const LOAD = 'images/LOAD';
-const LOAD_USER_IMAGES = 'images/LOAD_USER_IMAGE'
-const ADD_IMAGE = 'images/ADD_IMAGE'
-const EDIT_IMAGE = 'images/EDIT_IMAGE'
+const LOAD_USER_IMAGES = 'images/LOAD_USER_IMAGE';
+const ADD_IMAGE = 'images/ADD_IMAGE';
+const EDIT_IMAGE = 'images/EDIT_IMAGE';
+const DELETE_IMAGE = 'images/DELETE_IMAGE';
 
 const load = images => ({
   type: LOAD,
@@ -20,6 +21,11 @@ const addImage = image => ({
 
 const editImage = image => ({
   type: EDIT_IMAGE,
+  image
+})
+
+const deleteImage = image => ({
+  type: DELETE_IMAGE,
   image
 })
 
@@ -73,6 +79,15 @@ export const editImageThunk = (id, payload) => async dispatch => {
   }
 }
 
+export const deleteImageThunk = id => async dispatch => {
+  const response = await fetch(`/api/images/${id}`, {
+    method: 'DELETE',
+  });
+  if(response.ok) {
+    dispatch(deleteImage(id))
+  }
+}
+
 const initalState = {}
 
 const imagesReducer = (state = initalState, action) => {
@@ -108,6 +123,12 @@ const imagesReducer = (state = initalState, action) => {
         ...state,
         [action.image.id]: action.image
       };
+    case DELETE_IMAGE:
+      const deletedState = {
+        ...state
+      };
+      delete deletedState[action.image];
+      return deletedState
       default:
         return state
   }

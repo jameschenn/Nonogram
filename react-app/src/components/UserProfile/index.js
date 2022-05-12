@@ -28,6 +28,10 @@ const UserProfile = () => {
           <li><img src={image?.imageUrl} alt={image?.id} /></li>
           <li>{image?.caption}</li>
           <EditImageForm />
+          <button type="button" onClick={() => {
+            dispatch(imageActions.deleteImageThunk(id))
+            // history.push('/images')
+          }}>Delete</button>
         </ul>
       ))}
     </>

@@ -54,3 +54,13 @@ def edit_caption(id):
     return image.to_dict()
 
   return form.errors
+
+@image_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_image(id):
+
+  image = Image.query.get(id)
+  deleted = image.to_dict()
+  db.session.delete(image)
+  db.session.commit()
+  return deleted
