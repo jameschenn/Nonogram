@@ -46,9 +46,6 @@ function App() {
         <ProtectedRoute path ='/images' exact={true} >
           <AllImages />
         </ProtectedRoute>
-        {/* <ProtectedRoute path='/user/:userId' exact={true}>
-          <UserProfile />
-        </ProtectedRoute> */}
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>

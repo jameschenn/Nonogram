@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
+import EditImageForm from "../EditImage/index";
 
 const UserProfile = () => {
 
@@ -11,6 +12,7 @@ const UserProfile = () => {
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
+  const imageData = Object.values(images)
 
   console.log('REACT', images)
   console.log('id', id)
@@ -20,7 +22,15 @@ const UserProfile = () => {
 
 
   return (
-    <h1>Hi</h1>
+    <>
+      {imageData.map((image, idx) => (
+        <ul>
+          <li><img src={image?.imageUrl} alt={image?.id} /></li>
+          <li>{image?.caption}</li>
+          <EditImageForm />
+        </ul>
+      ))}
+    </>
   )
 }
 
