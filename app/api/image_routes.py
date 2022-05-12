@@ -49,7 +49,7 @@ def edit_caption(id):
 
   if form.validate_on_submit():
     image.caption = data['caption']
-
+    print('----------CAPTION----------', image.caption)
     db.session.commit()
     return image.to_dict()
 

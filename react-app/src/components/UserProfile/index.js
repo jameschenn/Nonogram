@@ -8,14 +8,13 @@ const UserProfile = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { id } = useParams();
+  const { id } = useParams(); //user Id
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
+  console.log('imageData', imageData)
 
-  console.log('REACT', images)
-  console.log('id', id)
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
   }, [dispatch, id])
@@ -29,7 +28,7 @@ const UserProfile = () => {
           <li>{image?.caption}</li>
           <EditImageForm />
           <button type="button" onClick={() => {
-            dispatch(imageActions.deleteImageThunk(id))
+            dispatch(imageActions.deleteImageThunk(image?.id))
             // history.push('/images')
           }}>Delete</button>
         </ul>

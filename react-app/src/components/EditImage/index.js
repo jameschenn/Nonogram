@@ -10,6 +10,10 @@ const EditImageForm =() => {
   const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user)
+  const images = useSelector(state => state.images)
+  const imageData = Object.values(images)
+  console.log('FROM EDIT', imageData[id])
+
 
   useEffect(async () => {
     await dispatch(imageActions.loadUserImagesThunk(id))
@@ -21,6 +25,7 @@ const EditImageForm =() => {
     e.preventDefault();
 
     const payload = {
+
       caption,
     }
     dispatch(imageActions.editImageThunk(id, payload));
