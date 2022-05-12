@@ -71,13 +71,22 @@ export const loadOneImageThunk = id => async dispatch => {
   }
 }
 
-export const createImageThunk = image => async dispatch => {
+export const createImageThunk = imageId => async dispatch => {
+  const { userId, image, caption } = imageId
+
+  const formData = new FormData();
+
+  formData.append('userId', userId)
+  formData.append('caption', caption)
+
+  if(image) {
+    formData.append('image', image)
+  }
+
+
   const result = await fetch('/api/images/upload', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(image)
+    body: formData
   });
   if(result.ok) {
     const data = await result.json();

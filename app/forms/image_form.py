@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 class UploadImageForm(FlaskForm):
   userId = IntegerField('userId', validators=[DataRequired()])
-  imageUrl = StringField('ImageUrl', validators=[DataRequired()])
+  image = StringField('image', validators=[DataRequired()])
   caption = StringField('Caption')
 
 class EditCaptionForm(FlaskForm):

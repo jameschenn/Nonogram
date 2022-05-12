@@ -14,6 +14,7 @@ const UserProfile = () => {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
+  console.log('image info', imageData)
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
@@ -27,8 +28,8 @@ const UserProfile = () => {
         <ul>
           <div className='profile-img-cards'>
             <a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id} /></a>
-          </div>
           <li>{image?.caption}</li>
+          </div>
           <EditImageForm imageId={image.id} />
           <button type="button" onClick={() => {
             dispatch(imageActions.deleteImageThunk(image?.id))

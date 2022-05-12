@@ -12,20 +12,25 @@ function UploadImage() {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
 
-  const [imageUrl, setImageUrl] = useState('')
+  const [image, setImage] = useState(null)
   const [caption, setCaption] = useState('')
 
   const handleSubmit = async e => {
     e.preventDefault()
 
-    const image = {
+    const new_image = {
       userId: sessionUser.id,
-      imageUrl,
+      image,
       caption,
     }
 
-    await dispatch(imageActions.createImageThunk(image))
+    await dispatch(imageActions.createImageThunk(new_image))
     // history.push('/images')
+  }
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
   }
 
   return (
@@ -33,10 +38,8 @@ function UploadImage() {
       <form onSubmit={handleSubmit}>
         <div>
           <input
-            type='text'
-            value={imageUrl}
-            placeholder='TODO: Change to AWS after CRUD'
-            onChange={e => setImageUrl(e.target.value)}
+            type='file'
+            onChange={updateImage}
           />
         </div>
         <div>

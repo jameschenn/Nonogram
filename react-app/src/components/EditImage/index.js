@@ -12,8 +12,6 @@ const EditImageForm =({imageId}) => {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
-  console.log('FROM EDIT', imageData)
-
 
   useEffect(async () => {
     await dispatch(imageActions.loadUserImagesThunk(id))

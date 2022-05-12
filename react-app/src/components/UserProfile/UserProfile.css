@@ -1,11 +1,14 @@
-.profile-img-container {
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
 
+.profile-img-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   flex-grow: 1;
-
 }
 
 .profile-img-cards {
