@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.profile-img-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-grow: 1;
+}
+
+.profile-img-cards {
+  list-style-type: none;
+}
+
+.profile-img-cards img {
+  border-radius: 0px;
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+  vertical-align: bottom;
+}

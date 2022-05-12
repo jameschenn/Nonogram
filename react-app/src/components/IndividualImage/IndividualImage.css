@@ -1,0 +1,33 @@
+.profile-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+  border: solid lightskyblue 2px;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+}
+
+.post-info ul {
+  list-style-type: none;
+}
+
+.post-image img {
+    border-radius: 0px;
+      height: 600px;
+      width: 600px;
+      object-fit: cover;
+      vertical-align: bottom;
+}
