@@ -13,7 +13,6 @@ const UserProfile = () => {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
-  console.log('imageData', imageData)
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))

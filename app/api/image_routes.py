@@ -17,26 +17,31 @@ def get_user_images(id):
   user_images = user.images
   return { 'images': [ image.to_dict() for image in user_images ]  }
 
-# @image_routes.route('/upload', methods=['GET', 'POST'])
-# @login_required
-# def upload_image():
+@image_routes.route('/<int:id>/image')
+def get_individual_image(id):
+  image = Image.query.get(id)
+  return { 'image': image.to_dict() }
 
-#   form = UploadImageForm()
+@image_routes.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload_image():
 
-#   form['csrf_token'].data = request.cookies['csrf_token']
+  form = UploadImageForm()
 
-#   if form.validate_on_submit():
-#     data = form.data
-#     image = Image(
-#       userId = data['userId'],
-#       imageUrl = data['imageUrl'],
-#       caption = data['caption'],
-#       )
-#     db.session.add(image)
-#     db.session.commit()
-#     return { 'group': group.to_dict() }
+  form['csrf_token'].data = request.cookies['csrf_token']
 
-#   return form.errors
+  if form.validate_on_submit():
+    data = form.data
+    image = Image(
+      userId = data['userId'],
+      imageUrl = data['imageUrl'],
+      caption = data['caption'],
+      )
+    db.session.add(image)
+    db.session.commit()
+    return { 'image': image.to_dict() }
+
+  return form.errors
 
 @image_routes.route('/<int:id>/edit', methods=['POST'])
 @login_required

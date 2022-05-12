@@ -11,6 +11,8 @@ import { authenticate } from './store/session';
 
 import AllImages from './components/AllImages';
 import UserProfile from './components/UserProfile'
+import IndividualPicture from './components/IndividualPicture'
+import UploadImage from './components/UploadImage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -46,6 +48,13 @@ function App() {
         <ProtectedRoute path ='/images' exact={true} >
           <AllImages />
         </ProtectedRoute>
+        <ProtectedRoute path='/images/upload' exact={true} >
+          {console.log('ROUTE HIT')}
+          <UploadImage />
+        </ProtectedRoute>
+        {/* <ProtectedRoute path ='users/:id/image' exact={true} >
+          <IndividualPicture />
+        </ProtectedRoute> */}
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
         </ProtectedRoute>

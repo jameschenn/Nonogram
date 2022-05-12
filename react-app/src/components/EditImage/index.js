@@ -12,7 +12,7 @@ const EditImageForm =() => {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
-  console.log('FROM EDIT', imageData[id])
+  console.log('FROM EDIT', imageData[id].id)
 
 
   useEffect(async () => {
