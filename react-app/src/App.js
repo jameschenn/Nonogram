@@ -50,9 +50,9 @@ function App() {
         <ProtectedRoute path='/me' exact={true} >
           <SessionUserProfile />
         </ProtectedRoute>
-        <ProtectedRoute path ='/images' exact={true} >
+        {/* <ProtectedRoute path ='/images' exact={true} >
           <AllImages />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
         <ProtectedRoute path='/images/upload' exact={true} >
           <UploadImage />
         </ProtectedRoute>
@@ -60,7 +60,7 @@ function App() {
           <IndividualImage />
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <AllImages />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
