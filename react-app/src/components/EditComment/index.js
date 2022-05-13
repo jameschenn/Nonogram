@@ -4,15 +4,17 @@ import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from "../../store/images";
 import * as commentActions from "../../store/comments";
 
-const EditCommentForm = () => {
+const EditCommentForm = ({commentId}) => {
 
-  const { id } = useParams();
+  const { id } = useParams(); // image id
   const dispatch = useDispatch();
   const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const comments = useSelector(state => state.comments)
+  console.log('comment prop', commentId.id)
+
 
   useEffect(async () => {
     await dispatch(imageActions.loadUserImagesThunk(id))
@@ -26,7 +28,7 @@ const EditCommentForm = () => {
     const payload = {
       comment,
     }
-    dispatch(commentActions.editCommentThunk(id, payload))
+    dispatch(commentActions.editCommentThunk(commentId.id, payload))
   }
 
   return (
@@ -44,3 +46,5 @@ const EditCommentForm = () => {
     </section>
   )
 }
+
+export default EditCommentForm

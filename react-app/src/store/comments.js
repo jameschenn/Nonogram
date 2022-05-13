@@ -86,6 +86,7 @@ const commentsReducer = (state = initialState, action) => {
         ...newState
       };
     case EDIT_COMMENT:
+      console.log('FROM THE REDUCER', action)
       return {
         ...state,
         [action.comment.id]: action.comment

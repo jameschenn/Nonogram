@@ -11,8 +11,14 @@ def get_all_images():
   images = Image.query.all()
   return { 'images': [ image.to_dict() for image in images ] }
 
-@image_routes.route('/<int:id>')
+@image_routes.route('/others/<int:id>')
 def get_user_images(id):
+  user = User.query.get(id)
+  user_images = user.images
+  return { 'images': [ image.to_dict() for image in user_images ]  }
+
+@image_routes.route('/<int:id>')
+def get_sessionuser_images(id):
   user_id = current_user.id
   user = User.query.get(user_id)
   user_images = user.images

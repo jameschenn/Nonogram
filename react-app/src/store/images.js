@@ -1,5 +1,6 @@
 const LOAD = 'images/LOAD';
 const LOAD_USER_IMAGES = 'images/LOAD_USER_IMAGE';
+// const LOAD_SESSION_USER_IMAGES = 'images/LOAD_SESSION_USER_IMAGE'
 const LOAD_ONE_IMAGE = 'images/LOAD_ONE_IMAGE';
 const ADD_IMAGE = 'images/ADD_IMAGE';
 const EDIT_IMAGE = 'images/EDIT_IMAGE';
@@ -14,6 +15,11 @@ const loadUserImages = image => ({
   type: LOAD_USER_IMAGES,
   image
 });
+
+// const loadSessionUserImages = image => ({
+//   type: LOAD_SESSION_USER_IMAGES,
+//   image
+// });
 
 const loadOneImage = image => ({
   type:LOAD_ONE_IMAGE,
@@ -48,7 +54,7 @@ export const loadAllImagesThunk = () => async dispatch => {
 }
 
 export const loadUserImagesThunk = id => async dispatch => {
-  const result = await fetch(`/api/images/${id}`, {
+  const result = await fetch(`/api/images/others/${id}`, {
     headers: {
       'Content-Type': 'application/json'
     }
@@ -56,6 +62,18 @@ export const loadUserImagesThunk = id => async dispatch => {
   if(result.ok) {
     const data = await result.json();
     dispatch(loadUserImages(data));
+  }
+}
+
+export const loadSessionUserImagesThunk = id => async dispatch => {
+  const result = await fetch(`/api/images/${id}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  if(result.ok) {
+    const data = await result.json();
+    dispatch(loadUserImages(data))
   }
 }
 

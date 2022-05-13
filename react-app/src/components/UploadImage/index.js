@@ -25,7 +25,7 @@ function UploadImage() {
     }
 
     await dispatch(imageActions.createImageThunk(new_image))
-    // history.push('/images')
+    history.push('/images')
   }
 
   const updateImage = (e) => {
