@@ -13,8 +13,6 @@ const EditCommentForm = ({commentId}) => {
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const comments = useSelector(state => state.comments)
-  console.log('comment prop', commentId.id)
-
 
   useEffect(async () => {
     await dispatch(imageActions.loadUserImagesThunk(id))

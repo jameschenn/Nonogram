@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
+import PostComment from "../PostComment";
 import EditImageForm from "../EditImage/index";
 import EditCommentForm from '../EditComment/index';
 import './IndividualImage.css';
@@ -39,6 +40,7 @@ const IndividualImage = () => {
             <button type='button' onClick={() => {dispatch(commentActions.deleteCommentThunk(comment.id))}}> Delete Comment</button>
           </ul>
         ))}
+        <PostComment />
       </div>
       <div>
         <EditImageForm imageId={imageData?.id} />

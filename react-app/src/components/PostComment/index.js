@@ -7,25 +7,45 @@ function PostComment() {
 
   const dispatch = useDispatch()
   const history = useHistory()
-  const { id } = useParams()
+  const { id } = useParams() //Image ID
 
   const sessionUser = useSelector(state => state.session.user)
+  const images = useSelector(state => state.images)
+  const reviews = useSelector(state => state.reviews)
+  console.log('REVIEWS', reviews)
+
 
 
   const [comment, setComment] = useState('')
 
 
-  const handlesubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault()
 
-    const comment = {
+    const new_comment = {
       userId: sessionUser.id,
-      imageId,
+      imageId: images[id].id,
       comment,
     }
 
-    await dispatch(commentActions.addCommentThunk(comment))
+    await dispatch(commentActions.addCommentThunk(new_comment, images[id].id))
   }
 
+  return (
+    <section>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type='text'
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+          />
+        </div>
+        <button type="submit">Submit Comment</button>
+      </form>
+    </section>
+  )
 
 }
+
+export default PostComment

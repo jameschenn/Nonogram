@@ -35,13 +35,14 @@ export const loadCommentsThunk = id => async dispatch => {
   }
 }
 
-export const addCommentThunk = (id) => async dispatch => {
-  const result = await fetch(`/api/comments/${id}/`, {
+export const addCommentThunk = (payload, id) => async dispatch => {
+  console.log('THUNK', id )
+  const result = await fetch(`/api/comments/${id}/comments`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(id)
+    body: JSON.stringify(payload)
   })
   if(result.ok) {
     const data = await result.json()
@@ -85,8 +86,15 @@ const commentsReducer = (state = initialState, action) => {
         ...state,
         ...newState
       };
+    case ADD_COMMENT:
+      console.log('REDUCER', action)
+      const newComment = {};
+      newComment[action.comment.comment.id] = action.comment.comment
+      return {
+        ...state,
+        ...newComment
+      };
     case EDIT_COMMENT:
-      console.log('FROM THE REDUCER', action)
       return {
         ...state,
         [action.comment.id]: action.comment
