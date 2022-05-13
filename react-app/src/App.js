@@ -12,7 +12,9 @@ import { authenticate } from './store/session';
 import AllImages from './components/AllImages';
 import UserProfile from './components/UserProfile'
 import IndividualImage from './components/IndividualImage'
+import SessionUserProfile from './components/SessionUserProfile';
 import UploadImage from './components/UploadImage';
+import PostComment from './components/PostComment'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -44,6 +46,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/users/:id' exact={true} >
           <UserProfile />
+        </ProtectedRoute>
+        <ProtectedRoute path='/me' exact={true} >
+          <SessionUserProfile />
         </ProtectedRoute>
         <ProtectedRoute path ='/images' exact={true} >
           <AllImages />
