@@ -14,7 +14,6 @@ def get_comments(id):
 @comment_routes.route('/<int:id>/comments', methods=['POST'])
 @login_required
 def post_comment(id): #ID for imageId
-  print('HELLO FROM THE BACKEND=============================================================================')
   form = PostCommentForm()
 
   form['csrf_token'].data = request.cookies['csrf_token']

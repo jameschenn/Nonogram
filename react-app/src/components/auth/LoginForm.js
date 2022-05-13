@@ -18,6 +18,14 @@ const LoginForm = () => {
     }
   };
 
+  const demo = async e => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@nonogram.com', 'password'));
+    if(data) {
+      setErrors(data);
+    }
+  }
+
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -57,6 +65,7 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type='submit'>Login</button>
+        <button type="submit" onClick={demo}>Demo Login</button>
       </div>
     </form>
   );
