@@ -1,6 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, session, request
 from app.models import db, User, Comment, Image
 from flask_login import login_required, current_user
+from app.forms import PostCommentForm
 
 comment_routes = Blueprint('comments',__name__)
 
@@ -34,7 +35,7 @@ def post_comment(id): #ID for postId
 @login_required
 def edit_comment(id):
 
-  form = PostCommentform()
+  form = PostCommentForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   data = form.data
   comment = Comment.query.get(id)

@@ -3,4 +3,4 @@ from wtforms import StringField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 
 class PostCommentForm(FlaskForm):
-  comment = String('comment')
+  comment = StringField('comment')

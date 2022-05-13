@@ -35,7 +35,7 @@ export const loadCommentsThunk = id => async dispatch => {
   }
 }
 
-export const addCommentThunk = id => async dispatch => {
+export const addCommentThunk = (id) => async dispatch => {
   const result = await fetch(`/api/comments/${id}/`, {
     method: 'POST',
     headers: {
@@ -50,7 +50,7 @@ export const addCommentThunk = id => async dispatch => {
 }
 
 export const editCommentThunk = (id, payload) => async dispatch => {
-  const response = await fetch(`/api/images/${id}/edit`, {
+  const response = await fetch(`/api/comments/${id}/edit`, {
     method: 'POST',
     headers: {
       'Content-Type': ' application/json'
