@@ -1,5 +1,6 @@
 const LOAD = 'comments/LOAD';
 const ADD_COMMENT = 'comments/ADD_COMMENT';
+const EDIT_COMMENT = 'comments/EDIT_COMMENT';
 const DELETE_COMMENT = 'comments/DELETE_COMMENT';
 
 const load = comments => ({
@@ -11,6 +12,11 @@ const addComment = comment => ({
   type: ADD_COMMENT,
   comment
 });
+
+const editComment = comment => ({
+  type: EDIT_COMMENT,
+  comment
+})
 
 const deleteComment = comment => ({
   type: DELETE_COMMENT,
@@ -43,8 +49,21 @@ export const addCommentThunk = id => async dispatch => {
   }
 }
 
+export const editCommentThunk = (id, payload) => async dispatch => {
+  const response = await fetch(`/api/images/${id}/edit`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': ' application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+  if(response.ok) {
+    const editedComment = await response.json();
+    return dispatch(editComment(editedComment))
+  }
+}
+
 export const deleteCommentThunk = id => async dispatch => {
-  console.log('THUNK')
   const response = await fetch(`/api/comments/${id}`, {
     method: 'DELETE',
   });
@@ -65,6 +84,11 @@ const commentsReducer = (state = initialState, action) => {
       return {
         ...state,
         ...newState
+      };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: action.comment
       };
     case DELETE_COMMENT:
       const deletedState = {

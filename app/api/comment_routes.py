@@ -30,6 +30,23 @@ def post_comment(id): #ID for postId
 
   return form.errors
 
+@comment_routes.route('/<int:id>/edit', methods=['POST'])
+@login_required
+def edit_comment(id):
+
+  form = PostCommentform()
+  form['csrf_token'].data = request.cookies['csrf_token']
+  data = form.data
+  comment = Comment.query.get(id)
+
+  if form.validate_on_submit():
+    comment.comment = data['comment']
+    db.session.commit()
+    return comment.to_dict()
+
+  return form.errors
+
+
 @comment_routes.route('<int:id>', methods=['DELETE'])
 @login_required
 def delete_comment(id):
