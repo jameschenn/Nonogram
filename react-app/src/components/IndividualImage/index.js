@@ -37,12 +37,14 @@ const IndividualImage = () => {
         {commentsData.map((comment, idx) => (
           <ul>
             <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment}</li>
+            <button type='button' onClick={() => {dispatch(commentActions.deleteCommentThunk(comment.id))}}> Delete Comment</button>
           </ul>
         ))}
       </div>
       <div>
         <EditImageForm imageId={imageData?.id} />
-          <button type="button" onClick={() => {
+          <button type='button' onClick={() => {
+            console.log('REACT FRONT END')
             dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/users/${user.id}`))
             // history.push(`/users/${user.id}`)
           }}>Delete</button>
