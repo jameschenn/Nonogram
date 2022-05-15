@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import Popup from 'reactjs-popup';
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
 import PostComment from "../PostComment";
@@ -25,8 +26,9 @@ const IndividualImage = () => {
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
 
-  console.log('USER', user)
+  console.log('USER', user.id, commentsData.userId)
   console.log('imageData', imageData)
+  console.log('comment', commentsData)
 
   return (
     <>
@@ -38,9 +40,24 @@ const IndividualImage = () => {
           <p><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{imageData?.user?.username}</span> {imageData?.caption}</p>
         {commentsData.map((comment, idx) => (
           <ul>
-            <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment}</li>
-            <EditCommentForm commentId={comment} />
-            <button type='button' onClick={() => {dispatch(commentActions.deleteCommentThunk(comment.id))}}> Delete Comment</button>
+            <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment} {user?.id === comment?.userId && (
+              <>
+                <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+                  <p>Edit Your Caption</p>
+                  <EditCommentForm commentId={comment} />
+                  <button type='button' onClick={() => { dispatch(commentActions.deleteCommentThunk(comment.id)) }}> Delete Comment</button>
+                </Popup>
+              </>
+            )}</li>
+            {/* {user?.id === comment?.userId && (
+              <>
+              <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+                <p>Edit Your Caption</p>
+                <EditCommentForm commentId={comment} />
+                <button type='button' onClick={() => {dispatch(commentActions.deleteCommentThunk(comment.id))}}> Delete Comment</button>
+              </Popup>
+            </>
+            )} */}
           </ul>
         ))}
         <PostComment />
@@ -48,11 +65,14 @@ const IndividualImage = () => {
       <div>
         {user?.id === imageData?.userId && (
           <>
-          <EditImageForm imageId={imageData?.id} />
-          <button type='button' onClick={() => {
-            dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
-            // history.push(`/users/${user.id}`)
-          }}>Delete</button>
+              <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+            <p>Edit Your Caption</p>
+                <EditImageForm imageId={imageData?.id} />
+                <p>Delete Your Image</p>
+                <button type='button' onClick={() => {
+                  dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
+                }}>Delete</button>
+          </Popup>
             </>
           )}
       </div>

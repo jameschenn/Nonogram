@@ -24,7 +24,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +40,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -70,19 +70,56 @@ export const logout = () => async (dispatch) => {
 };
 
 
-export const signUp = (username, email, password) => async (dispatch) => {
+// export const signUp = (username, email, password) => async (dispatch) => {
+//   const response = await fetch('/api/auth/signup', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({
+//       username,
+//       email,
+//       password,
+//     }),
+//   });
+
+//   if (response.ok) {
+//     const data = await response.json();
+//     dispatch(setUser(data))
+//     return null;
+//   } else if (response.status < 500) {
+//     const data = await response.json();
+//     if (data.errors) {
+//       return data.errors;
+//     }
+//   } else {
+//     return ['An error occurred. Please try again.']
+//   }
+// }
+
+
+export const signUp = (new_user) => async (dispatch) => {
+
+  const { username, firstName, lastName, email, password, bio, image } = new_user
+
+  const formData = new FormData();
+
+  formData.append('username', username)
+  formData.append('firstName', firstName)
+  formData.append('lastName', lastName)
+  formData.append('email', email)
+  formData.append('password', password)
+  formData.append('bio', bio)
+
+  if(image) {
+    formData.append('image', image)
+  }
+
   const response = await fetch('/api/auth/signup', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username,
-      email,
-      password,
-    }),
+    body: formData
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -96,6 +133,7 @@ export const signUp = (username, email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 }
+
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
