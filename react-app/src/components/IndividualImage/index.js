@@ -25,6 +25,9 @@ const IndividualImage = () => {
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
 
+  console.log('USER', user)
+  console.log('imageData', imageData)
+
   return (
     <>
     <div className='post-container'>
@@ -43,11 +46,15 @@ const IndividualImage = () => {
         <PostComment />
       </div>
       <div>
-        <EditImageForm imageId={imageData?.id} />
+        {user?.id === imageData?.userId && (
+          <>
+          <EditImageForm imageId={imageData?.id} />
           <button type='button' onClick={() => {
             dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
             // history.push(`/users/${user.id}`)
           }}>Delete</button>
+            </>
+          )}
       </div>
     </div>
     </>

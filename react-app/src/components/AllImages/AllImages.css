@@ -1,0 +1,30 @@
+.img-feed-card .profile-icon {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+}
+
+.img-feed-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 2px green;
+}
+
+.img-feed-card li {
+  list-style-type: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
+.img-feed-card img {
+  border-radius: 0px;
+  height: 600px;
+  width: 600px;
+  object-fit: cover;
+  vertical-align: bottom;
+
+}
