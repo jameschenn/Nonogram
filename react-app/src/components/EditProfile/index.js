@@ -15,8 +15,8 @@ const EditProfileForm = () => {
   const [errors, setErrors] = ([]);
   const [firstName, setFirstName] = useState(sessionUser.firstName);
   const [lastName, setLastName] = useState(sessionUser.lastName);
-  const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('')
+  // const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [bio, setBio] = useState(sessionUser.bio);
   const [image, setImage] = useState('');
 
@@ -24,44 +24,46 @@ const EditProfileForm = () => {
     e.preventDefault();
 
     const payload = {
+      userId: sessionUser.id,
       firstName,
       lastName,
-      password,
+      // password,
       bio,
+      image,
     }
-    if(password === repeatPassword) {
-      const data = await dispatch(sessionActions.editUserThunk(payload));
-      if (data) {
-        setErrors(data)
-      }
-    }
+    const data = await dispatch(sessionActions.editUserThunk(payload));
+    // if(password === repeatPassword) {
+    //   if (data) {
+    //     setErrors(data)
+    //   }
+    // }
+  }
+    // const updateFirstName = (e) => {
+    //   setFirstName(e.target.value);
+    // };
 
-    const updateFirstName = (e) => {
-      setFirstName(e.target.value);
-    };
+    // const updateLastName = (e) => {
+    //   setLastName(e.target.value);
+    // };
 
-    const updateLastName = (e) => {
-      setLastName(e.target.value);
-    };
+    // const updatePassword = (e) => {
+    //   setPassword(e.target.value);
+    // };
 
-    const updatePassword = (e) => {
-      setPassword(e.target.value);
-    };
+    // const updateRepeatPassword = (e) => {
+    //   setRepeatPassword(e.target.value);
+    // };
 
-    const updateRepeatPassword = (e) => {
-      setRepeatPassword(e.target.value);
-    };
-
-    const updateBio = (e) => {
-      setBio(e.target.value);
-    };
+    // const updateBio = (e) => {
+    //   setBio(e.target.value);
+    // };
 
     const updateImage = (e) => {
       const file = e.target.files[0];
       console.log('FILE', file)
       setImage(file);
     }
-  }
+
 
   return (
     <section>
@@ -82,7 +84,7 @@ const EditProfileForm = () => {
             onChange={(e => setLastName(e.target.value))}
           />
         </div>
-        <div>
+        {/* <div>
           <label>Password</label>
           <input
             type="text"
@@ -97,7 +99,7 @@ const EditProfileForm = () => {
             value={repeatPassword}
             onChange={(e => setRepeatPassword(e.target.value))}
           />
-        </div>
+        </div> */}
         <div>
           <label>Bio</label>
           <input
@@ -110,8 +112,7 @@ const EditProfileForm = () => {
           <label>Profile Picture</label>
           <input
             type="file"
-            value={image}
-            onChange={(e => setImage(e.target.value))}
+            onChange={updateImage}
             accept='image/jpeg, image/jpg, image/png'
           />
         </div>

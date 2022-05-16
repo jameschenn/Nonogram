@@ -21,8 +21,8 @@ def username_exists(form, field):
 
 
 class UpdateProfileForm(FlaskForm):
-    firstName = StringField('firstName', validators=[DataRequired()])
-    lastName = StringField('lastName', validators=[DataRequired()])
-    password = StringField('password', validators=[DataRequired()])
+    firstName = StringField('firstName')
+    lastName = StringField('lastName')
+    password = StringField('password')
     bio = StringField('bio')
     image = StringField('image')

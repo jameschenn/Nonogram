@@ -142,13 +142,13 @@ export const signUp = (new_user) => async dispatch => {
 
 export const editUserThunk = user => async dispatch => {
 
-  const { userId, firstName, lastName, password, bio, image} = user
-  console.log('FROM THE THUNK', userId, firstName, lastName)
+  const { userId, firstName, lastName, bio, image} = user
+  console.log('FROM THE THUNK', userId, firstName, lastName, bio, image)
   const formData = new FormData();
 
   formData.append('firstName', firstName)
   formData.append('lastName', lastName)
-  formData.append('password', password)
+  // formData.append('password', password)
   formData.append('bio', bio)
 
   if(image) {
