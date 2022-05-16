@@ -1,6 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const UPDATE_USER = 'session/UPDATE_USER';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -12,6 +13,11 @@ const removeUser = () => ({
 })
 
 const initialState = { user: null };
+
+const updateUser = user => ({
+  type: UPDATE_USER,
+  user
+})
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -98,7 +104,7 @@ export const logout = () => async (dispatch) => {
 // }
 
 
-export const signUp = (new_user) => async (dispatch) => {
+export const signUp = (new_user) => async dispatch => {
 
   const { username, firstName, lastName, email, password, bio, image } = new_user
 
@@ -134,6 +140,33 @@ export const signUp = (new_user) => async (dispatch) => {
   }
 }
 
+export const editUserThunk = user => async dispatch => {
+
+  const { userId, firstName, lastName, password, bio, image} = user
+
+  const formData = new FormData();
+
+  formData.append('firstName', firstName)
+  formData.append('lastName', lastName)
+  formData.append('password', password)
+  formData.append('bio', bio)
+
+  if(image) {
+    formData.append('image', image)
+  }
+  const response = await fetch(`/api/users/${userId}`, {
+    method: 'PUT',
+    body: formData
+  });
+
+  if (response.ok) {
+    const editedUser = await response.json();
+    return dispatch(setUser(editedUser));
+  }
+
+}
+
+
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -141,6 +174,11 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
+    case UPDATE_USER:
+      return {
+        ...state,
+        [action.user.id] : action.user
+      }
     default:
       return state;
   }

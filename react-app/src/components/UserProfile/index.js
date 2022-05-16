@@ -9,11 +9,26 @@ const UserProfile = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const [user, setUser] = useState({});
   const { id } = useParams(); //user Id
+
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    (async () => {
+      const response = await fetch(`/api/users/${id}`);
+      const user = await response.json();
+      setUser(user);
+    })();
+  }, [id]);
+
+  console.log(user?.profilePictureUrl, 'user')
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
@@ -22,6 +37,8 @@ const UserProfile = () => {
 
   return (
     <>
+      <img src={user?.profilePictureUrl}/>
+      <h1>Image upload test ^^^</h1>
     <div className='profile-img-container'>
       {imageData.map((image, idx) => (
         <ul>
