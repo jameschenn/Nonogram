@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const [bio, setBio] = useState('')
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
@@ -124,7 +124,7 @@ const SignUpForm = () => {
           type='file'
           name='image'
           onChange={updateImage}
-          value={image}
+          accept='image/jpeg, image/jpg, image/png'
         ></input>
       </div>
       <div>
