@@ -28,7 +28,8 @@ const UserProfile = () => {
     })();
   }, [id]);
 
-  console.log(user?.profilePictureUrl, 'user')
+  console.log(user, 'user')
+  console.log(images, 'imageData')
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
@@ -37,8 +38,18 @@ const UserProfile = () => {
 
   return (
     <>
-      <img src={user?.profilePictureUrl}/>
-      <h1>Image upload test ^^^</h1>
+    <div className='profile-header'>
+    <img src={user?.profilePictureUrl} alt={user?.username} className='user-profile-icon'/>
+      <div className="username">
+        <h1>{user?.username}</h1>
+      </div>
+      <div className='profile-info'>
+        <h4>{imageData.length} Posts</h4>
+        <h4>{user?.followers?.length} Followers</h4>
+        <h4>{user?.following?.length} Followers</h4>
+      </div>
+      <div className='bio'>{user.bio}</div>
+    </div>
     <div className='profile-img-container'>
       {imageData.map((image, idx) => (
         <ul>
