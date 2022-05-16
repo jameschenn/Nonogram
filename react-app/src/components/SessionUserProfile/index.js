@@ -15,6 +15,7 @@ const SessionUserProfile = () => {
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
 
+  console.log('sessionuser', sessionUser)
   useEffect(async () => {
     await dispatch(imageActions.loadSessionUserImagesThunk(sessionUser.id))
   }, [dispatch, id])
@@ -22,6 +23,18 @@ const SessionUserProfile = () => {
 
   return (
     <>
+      <div className='profile-header'>
+        <img src={sessionUser?.profilePictureUrl} alt={sessionUser?.username} className='user-profile-icon' />
+        <div className="username">
+          <h1>{sessionUser?.username}</h1>
+        </div>
+        <div className='profile-info'>
+          <h4>{imageData.length} Posts</h4>
+          <h4>{sessionUser?.followers?.length} Followers</h4>
+          <h4>{sessionUser?.following?.length} Followers</h4>
+        </div>
+        <div className='bio'>{sessionUser.bio}</div>
+      </div>
       <div className='profile-img-container'>
         {imageData.map((image, idx) => (
           <ul>
