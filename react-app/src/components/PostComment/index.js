@@ -11,9 +11,6 @@ function PostComment() {
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
-  const reviews = useSelector(state => state.reviews)
-  console.log('REVIEWS', reviews)
-
 
 
   const [comment, setComment] = useState('')

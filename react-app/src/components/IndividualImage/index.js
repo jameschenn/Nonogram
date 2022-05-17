@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
+import * as likeActions from '../../store/likes';
 import PostComment from "../PostComment";
 import EditImageForm from "../EditImage/index";
 import EditCommentForm from '../EditComment/index';
@@ -18,6 +19,7 @@ const IndividualImage = () => {
   useEffect(() => {
     dispatch(imageActions.loadOneImageThunk(id))
     dispatch(commentActions.loadCommentsThunk(id))
+    dispatch(likeActions.loadLikesThunk())
   }, [dispatch, id])
 
   const user = useSelector(state => state.session.user)
@@ -25,11 +27,26 @@ const IndividualImage = () => {
   const imageData = images[id]
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
+  const likes = useSelector(state => state.likes)
+  console.log('likes', likes)
 
-  console.log('USER', user.id, commentsData.userId)
-  console.log('imageData', imageData)
-  console.log('comment', commentsData)
+  const [likeId, setLikeId] = useState(0)
 
+  let like;
+
+  useEffect(() => {
+    if(images) {
+      like = imageData?.likes?.filter((like) => {
+        return user.id === like.userId
+      })
+    }
+    if(like) {
+      setLikeId(like[0]?.id)
+    }
+  }, [imageData, user?.id, images, like])
+
+  console.log('likeId', likeId)
+  console.log('imageData', imageData?.id)
   return (
     <>
     <div className='post-container'>
@@ -60,6 +77,14 @@ const IndividualImage = () => {
             )} */}
           </ul>
         ))}
+        <p>{imageData?.likes?.length} likes</p>
+          <button type='button' onClick={() => {
+            dispatch(likeActions.postLikeThunk(imageData?.id))
+          }}>Like</button>
+
+        <button type='button' onClick={() => {
+            dispatch(likeActions.deleteLikeThunk(likeId))
+        }}>Remove like</button>
         <PostComment />
       </div>
       <div>

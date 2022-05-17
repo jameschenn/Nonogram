@@ -133,6 +133,32 @@ export const deleteImageThunk = id => async dispatch => {
   }
 }
 
+//LIKES
+
+// export const deleteLikeThunk = id => async dispatch => {
+//   console.log('THUNK')
+//   const response = await fetch(`/api/likes/${id}`, {
+//     method: 'DELETE'
+//   });
+//   if (response.ok) {
+//     dispatch(deleteLike(id))
+//   }
+// }
+
+// export const postLikeThunk = id => async dispatch => {
+//   const response = await fetch(`/api/likes`, {
+//     method: 'POST',
+//     headers: {
+//       'CONTENT-TYPE': 'application/json'
+//     },
+//     body: JSON.stringify(id)
+//   })
+//   if(response.ok) {
+//     const data = await response.json();
+//     dispatch(postLike(data))
+//   }
+// }
+
 const initalState = {}
 
 const imagesReducer = (state = initalState, action) => {

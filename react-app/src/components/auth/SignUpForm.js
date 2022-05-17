@@ -17,6 +17,23 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  const emailValidator = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
+  // useEffect(() => {
+  //   const errors = [];
+
+  //   if (username.length < 1) errors.push('Please enter a valid username')
+  //   if (firstName.length < 1) errors.push('Please provide a valid first name')
+  //   if (lastName.length < 1) errors.push('Please provide a valid last name')
+  //   if (!(email.match(emailValidator))) errors.push('Please provide a valid e-mail')
+  //   if () errors.push()
+  //   if () errors.push()
+  //   if () errors.push()
+  //   if () errors.push()
+  //   if () errors.push()
+  //   setErrors(errors)
+  // }, [])
+
   const onSignUp = async (e) => {
     e.preventDefault();
 

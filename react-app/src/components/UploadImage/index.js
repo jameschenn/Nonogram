@@ -6,7 +6,7 @@ import * as imageActions from '../../store/images'
 function UploadImage() {
 
   const dispatch = useDispatch()
-  const history = useHistory
+  const history = useHistory()
   const { id } = useParams()
 
   const sessionUser = useSelector(state => state.session.user)
@@ -25,7 +25,7 @@ function UploadImage() {
     }
 
     await dispatch(imageActions.createImageThunk(new_image))
-    history.push('/images')
+    history.push("/");
   }
 
   const updateImage = (e) => {
