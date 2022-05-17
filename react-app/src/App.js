@@ -15,6 +15,7 @@ import IndividualImage from './components/IndividualImage'
 import SessionUserProfile from './components/SessionUserProfile';
 import UploadImage from './components/UploadImage';
 import PostComment from './components/PostComment'
+import EditProfileForm from './components/EditProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +50,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/me' exact={true} >
           <SessionUserProfile />
+        </ProtectedRoute>
+        <ProtectedRoute path='/me/edit' exact={true} >
+          <EditProfileForm />
         </ProtectedRoute>
         {/* <ProtectedRoute path ='/images' exact={true} >
           <AllImages />

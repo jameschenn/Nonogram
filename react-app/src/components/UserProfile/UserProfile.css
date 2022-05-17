@@ -24,3 +24,35 @@ body {
   object-fit: cover;
   vertical-align: bottom;
 }
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.profile-info h4 {
+  margin-left: 20px;
+}
+
+
+.user-profile-icon {
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  object-fit: cover;
+  vertical-align: bottom;
+  border: solid lightgray 2px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

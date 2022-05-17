@@ -6,16 +6,31 @@ import { signUp } from '../../store/session';
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [bio, setBio] = useState('')
+  const [image, setImage] = useState('')
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
+
+    const new_user = {
+      username,
+      firstName,
+      lastName,
+      email,
+      password,
+      bio,
+      image
+    }
+
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(new_user));
       if (data) {
         setErrors(data)
       }
@@ -24,6 +39,14 @@ const SignUpForm = () => {
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
+  };
+
+  const updateFirstName = (e) => {
+    setFirstName(e.target.value);
+  };
+
+  const updateLastName = (e) => {
+    setLastName(e.target.value);
   };
 
   const updateEmail = (e) => {
@@ -38,6 +61,16 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateBio = (e) => {
+    setBio(e.target.value);
+  };
+
+  const updateImage = (e) => {
+    const file = e.target.files[0];
+    console.log('FILE', file)
+    setImage(file);
+  }
+
   if (user) {
     return <Redirect to='/' />;
   }
@@ -50,12 +83,48 @@ const SignUpForm = () => {
         ))}
       </div>
       <div>
-        <label>User Name</label>
+        <label>Username</label>
         <input
           type='text'
           name='username'
           onChange={updateUsername}
           value={username}
+        ></input>
+      </div>
+      <div>
+        <label>First Name</label>
+        <input
+          type='text'
+          name='firstName'
+          onChange={updateFirstName}
+          value={firstName}
+        ></input>
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input
+          type='text'
+          name='lastName'
+          onChange={updateLastName}
+          value={lastName}
+        ></input>
+      </div>
+      <div>
+        <label>Bio</label>
+        <input
+          type='text'
+          name='bio'
+          onChange={updateBio}
+          value={bio}
+        ></input>
+      </div>
+      <div>
+        <label>Profile Picture</label>
+        <input
+          type='file'
+          name='image'
+          onChange={updateImage}
+          accept='image/jpeg, image/jpg, image/png'
         ></input>
       </div>
       <div>

@@ -9,11 +9,27 @@ const UserProfile = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const [user, setUser] = useState({});
   const { id } = useParams(); //user Id
+
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
+
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    (async () => {
+      const response = await fetch(`/api/users/${id}`);
+      const user = await response.json();
+      setUser(user);
+    })();
+  }, [id]);
+
+  console.log(user, 'user')
+  console.log(images, 'imageData')
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
@@ -22,6 +38,18 @@ const UserProfile = () => {
 
   return (
     <>
+    <div className='profile-header'>
+    <img src={user?.profilePictureUrl} alt={user?.username} className='user-profile-icon'/>
+      <div className="username">
+        <h1>{user?.username}</h1>
+      </div>
+      <div className='profile-info'>
+        <h4>{imageData.length} Posts</h4>
+        <h4>{user?.followers?.length} Followers</h4>
+        <h4>{user?.following?.length} Followers</h4>
+      </div>
+      <div className='bio'>{user.bio}</div>
+    </div>
     <div className='profile-img-container'>
       {imageData.map((image, idx) => (
         <ul>
