@@ -15,8 +15,6 @@ const EditProfileForm = () => {
   const [errors, setErrors] = ([]);
   const [firstName, setFirstName] = useState(sessionUser.firstName);
   const [lastName, setLastName] = useState(sessionUser.lastName);
-  // const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
   const [bio, setBio] = useState(sessionUser.bio);
   const [image, setImage] = useState('');
 
@@ -27,40 +25,15 @@ const EditProfileForm = () => {
       userId: sessionUser.id,
       firstName,
       lastName,
-      // password,
       bio,
       image,
     }
     const data = await dispatch(sessionActions.editUserThunk(payload));
-    // if(password === repeatPassword) {
-    //   if (data) {
-    //     setErrors(data)
-    //   }
-    // }
+
   }
-    // const updateFirstName = (e) => {
-    //   setFirstName(e.target.value);
-    // };
-
-    // const updateLastName = (e) => {
-    //   setLastName(e.target.value);
-    // };
-
-    // const updatePassword = (e) => {
-    //   setPassword(e.target.value);
-    // };
-
-    // const updateRepeatPassword = (e) => {
-    //   setRepeatPassword(e.target.value);
-    // };
-
-    // const updateBio = (e) => {
-    //   setBio(e.target.value);
-    // };
 
     const updateImage = (e) => {
       const file = e.target.files[0];
-      console.log('FILE', file)
       setImage(file);
     }
 
@@ -84,22 +57,6 @@ const EditProfileForm = () => {
             onChange={(e => setLastName(e.target.value))}
           />
         </div>
-        {/* <div>
-          <label>Password</label>
-          <input
-            type="text"
-            value={password}
-            onChange={(e => setPassword(e.target.value))}
-          />
-        </div>
-        <div>
-          <label>Repeat Password</label>
-          <input
-            type="text"
-            value={repeatPassword}
-            onChange={(e => setRepeatPassword(e.target.value))}
-          />
-        </div> */}
         <div>
           <label>Bio</label>
           <input
