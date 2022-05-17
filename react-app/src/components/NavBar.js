@@ -15,7 +15,7 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
-              Home
+              Nonogram
             </NavLink>
           </li>
           <li>

@@ -13,7 +13,7 @@
 .login-container {
   background-color: white;
   border: solid lightgray 1px;
-  height: 35rem;
+  height: 38rem;
   width: 20rem;
   box-shadow: 1px 1px 25px #888888;
 
@@ -35,21 +35,32 @@
 }
 
 .login-container input {
-  margin: 20px;
+  margin-left: 40px;
+  margin-top: 20px;
   border: solid 1px lightgray;
   background-color: lightcyan;
   height: 25px;
   width: 15rem;
 }
 
-/* .login-container button {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  align-items: center;
-  background-color: aqua;
-} */
+.login-buttons button {
+  background-color: cadetblue;
+  border: none;
+  color: white;
+  padding: 10px;
+  margin-left: 60px;
+  margin-top: 10px;
+  width: 200px;
 
-.login-button {
-  background-color: brown;
+}
+
+.login-buttons button:hover {
+  border: 2px solid cadetblue;
+  color: cadetblue;
+  background-color: white;
+}
+
+.nono-logo {
+  height: 200px;
+  width: 300px;
 }

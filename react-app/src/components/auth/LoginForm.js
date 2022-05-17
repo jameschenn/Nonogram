@@ -42,6 +42,7 @@ const LoginForm = () => {
   return (
     <div className='loginForm'>
       <div className='login-container'>
+        <img src='https://res.cloudinary.com/jameschenn/image/upload/v1652757406/Nonogram/Shih-Tzu-PNG-File_g8j0db.png' alt='nono-logo' className='nono-logo'/>
         <h2>Nonogram</h2>
       <form onSubmit={onLogin}>
         <div>
@@ -70,6 +71,9 @@ const LoginForm = () => {
           <div className='login-buttons'>
             <button type='submit'>Login</button>
             <button type="submit" onClick={demo}>Demo Login</button>
+          </div>
+          <div className='new-user'>
+            <p>New User? <a href={`/sign-up`}>Sign up!</a></p>
           </div>
       </form>
       </div>
