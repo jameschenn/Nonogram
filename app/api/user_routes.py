@@ -38,34 +38,45 @@ def update_profile(id):
     form = UpdateProfileForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        if "image" not in request.files:
-            return {"errors": "image required"}, 400
+        if not len(request.files):
+            user = User.query.filter(User.id == current_user.id).first()
 
-        image = request.files["image"]
-        print('image', image)
-        if not allowed_file(image.filename):
-            return {"errors": "file type not permitted"}, 400
+            user.firstName=form.data['firstName'],
+            user.lastName=form.data['lastName'],
+            user.bio=form.data['bio'],
+            db.session.add(user)
+            db.session.commit()
+            return user.to_dict()
+        else:
 
-        image.filename = get_unique_filename(image.filename)
+            if "image" not in request.files:
+                return {"errors": "image required"}, 400
 
-        upload = upload_file_to_s3(image)
-        print('upload', upload)
-        if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-            return upload, 400
+            image = request.files["image"]
+            print('image', image)
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}, 400
 
-        url = upload["url"]
-        # flask_login allows us to get the current user from the request
-        user = User.query.filter(User.id == current_user.id).first()
+            image.filename = get_unique_filename(image.filename)
 
-        user.firstName=form.data['firstName'],
-        user.lastName=form.data['lastName'],
-        # user.hashed_password=form.data['password'],
-        user.bio=form.data['bio'],
-        user.profilePictureUrl=url,
+            upload = upload_file_to_s3(image)
+            print('upload', upload)
+            if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+                return upload, 400
 
-        db.session.commit()
-        return user.to_dict()
+            url = upload["url"]
+            # flask_login allows us to get the current user from the request
+            user = User.query.filter(User.id == current_user.id).first()
+
+            user.firstName=form.data['firstName'],
+            user.lastName=form.data['lastName'],
+            # user.hashed_password=form.data['password'],
+            user.bio=form.data['bio'],
+            user.profilePictureUrl=url,
+
+            db.session.commit()
+            return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
