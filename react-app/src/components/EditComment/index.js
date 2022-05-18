@@ -39,7 +39,7 @@ const EditCommentForm = ({commentId}) => {
             onChange={(e => setComment(e.target.value))}
             />
         </div>
-        <button type="Submit">Edit Comment</button>
+        <button type="Submit" disabled={comment < 1}>Edit Comment</button>
       </form>
     </section>
   )
