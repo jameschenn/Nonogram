@@ -27,9 +27,14 @@ const IndividualImage = () => {
   const imageData = images[id]
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
-  const likes = useSelector(state => state.likes)
-  console.log('likes', likes)
+  const allLikes = useSelector(state => state.likes)
+  const allLikesArr = Object.values(allLikes)
+  const likes = allLikesArr.filter((like) => {
+    return like?.imageId === imageData?.id
+  })
 
+  console.log('user', user.likes)
+  console.log('imageData', imageData)
   const [likeId, setLikeId] = useState(0)
 
   let like;
@@ -38,12 +43,22 @@ const IndividualImage = () => {
     if(images) {
       like = imageData?.likes?.filter((like) => {
         return user.id === like.userId
+        console.log('STATE HAS CHANGED. FIRST IF')
       })
     }
     if(like) {
       setLikeId(like[0]?.id)
+      console.log('STATE HAS CHANGED. SECOND IF')
+      console.log('STATE HAS CHANGED like', like)
+      console.log('STATE HAS CHANGED likeId', likeId)
+      console.log('STATE HAS CHANGED like[0]', like[0])
     }
-  }, [imageData, user?.id, images, like])
+  }, [imageData, user?.id, images, like, allLikes, allLikesArr, likes])
+
+  // const handleLike =  e => {
+  //   e.preventDefault()
+  //   if()
+  // }
 
   console.log('likeId', likeId)
   console.log('imageData', imageData?.id)
@@ -77,7 +92,7 @@ const IndividualImage = () => {
             )} */}
           </ul>
         ))}
-        <p>{imageData?.likes?.length} likes</p>
+        <p>{likes?.length} likes</p>
           <button type='button' onClick={() => {
             dispatch(likeActions.postLikeThunk(imageData?.id))
           }}>Like</button>

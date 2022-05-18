@@ -4,18 +4,21 @@ from app.models import db, User, Like
 from flask_login import login_required, current_user
 
 like_routes = Blueprint('likes', __name__)
-
-
-
-#This gets session user's likes. Not what I need tho.
+# #This route gives me session user's routes. Not what I need
+# @like_routes.route('/', methods=['GET'])
+# # @login_required
+# def get_likes():
+#   user_id = current_user.id
+#   user = User.query.get(user_id)
+#   user_likes = user.likes
+#   return { 'likes': [ like.to_dict() for like in user_likes] }
 
 @like_routes.route('/', methods=['GET'])
 # @login_required
 def get_likes():
-  user_id = current_user.id
-  user = User.query.get(user_id)
-  user_likes = user.likes
-  return { 'likes': [ like.to_dict() for like in user_likes] }
+  likes = Like.query.all()
+  return { 'likes': [ like.to_dict() for like in likes] }
+
 
 @like_routes.route('/', methods=['POST'])
 @login_required

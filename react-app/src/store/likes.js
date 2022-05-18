@@ -68,13 +68,29 @@ const likesReducer = (state = initialState, action) => {
         ...state,
         ...newState
       }
+    // case POST_LIKE:
+    //   const newLike = {};
+    //   newLike[action.like.id] = action.like
+    //   return {
+    //     ...state,
+    //     ...newLike
+    //   };
     case POST_LIKE:
-      const newLike = {};
-      newLike[action.like.id] = action.like
+      // console.log('REDUCERRRRRRRRRRRRRRRRRRRRRRRRRRRRRR', action.like)
+      if(!state[action.like.id]) {
+        const newState = {
+          ...state,
+          [action.like.id] : action.like
+        }
+        return newState
+      }
       return {
         ...state,
-        ...newLike
-      };
+        [action.like.id]: {
+          ...state[action.like.id],
+          ...action.like
+        }
+      }
     case DELETE_LIKE:
       const deletedState = {
         ...state,
