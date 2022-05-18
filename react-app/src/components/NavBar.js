@@ -37,7 +37,7 @@ const NavBar = () => {
           <>
           <li>
             <NavLink to='/images/upload' exact={true} activeClassName='active'>
-              Add Image
+              <i class="fa-solid fa-circle-plus"></i>
             </NavLink>
           </li>
           <li>

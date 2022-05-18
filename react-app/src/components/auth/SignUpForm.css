@@ -4,8 +4,6 @@
 }
 
 
-
-
 .signUpForm {
   display: flex;
   flex-direction: column;
@@ -15,11 +13,11 @@
 }
 
 .signUp-container {
-  margin-top: 100px;
+  margin-top: 200px;
   padding: 20px;
   background-color: white;
   border: solid lightgray 1px;
-  height: 50rem;
+  height: 60rem;
   width: 20rem;
   box-shadow: 1px 1px 25px #888888;
 

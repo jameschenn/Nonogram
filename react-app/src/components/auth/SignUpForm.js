@@ -132,12 +132,12 @@ const SignUpForm = () => {
         <form onSubmit={onSignUp}>
           <h2>Nonogram</h2>
           <h4>Sign up to see photos from your friends.</h4>
-          <div>
+          <div className='error-div'>
             {hasSubmitted && errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <div>
+          <div className='error-div'>
             {hasSubmitted && frontEndErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}

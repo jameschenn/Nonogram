@@ -28,11 +28,7 @@ const IndividualImage = () => {
   // const likes = allLikesArr.filter((like) => {
   //   return like?.imageId === imageData?.id
   // })
-  console.log('image', images)
-  console.log('imagedata', imageData)
 
-  // console.log('user', user.likes)
-  // console.log('imageData', imageData)
   const [likeId, setLikeId] = useState(0)
 
 
@@ -50,6 +46,8 @@ const IndividualImage = () => {
   let like = likes?.find((like) => {
     return user.id === like.userId
   })
+
+
 
   console.log('LIKESSSSSSSSSSSSSSSSSSSSSSSSS', likes)
   console.log('filtered like', like)
@@ -69,10 +67,14 @@ const IndividualImage = () => {
   //   console.log('STATE HAS CHANGED likeId', likeId)
   // }, [dispatch])
 
-  // const handleLike =  e => {
-  //   e.preventDefault()
-  //   if()
-  // }
+  const handleLike =  e => {
+    e.preventDefault()
+    if(like) {
+      dispatch(likeActions.deleteLikeThunk(like?.id))
+    } else {
+      dispatch(likeActions.postLikeThunk(imageData?.id))
+    }
+  }
 
   console.log('likeId', likeId)
   console.log('imageData', imageData?.id)
@@ -108,14 +110,18 @@ const IndividualImage = () => {
         ))}
         <p>{likes?.length} likes</p>
 
-
-          <button type='button' onClick={() => {
+        {like ? (
+            <button onClick={handleLike}>❤️</button>
+        ): (
+              <button onClick={handleLike}>🤍</button>
+        )}
+          {/* <button type='button' onClick={() => {
             dispatch(likeActions.postLikeThunk(imageData?.id))
           }}>Like</button>
 
         <button type='button' onClick={() => {
             dispatch(likeActions.deleteLikeThunk(like?.id))
-        }}>Remove like</button>
+        }}>Remove like</button> */}
         <PostComment />
       </div>
       <div>
