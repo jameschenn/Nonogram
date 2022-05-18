@@ -4,6 +4,17 @@ from flask_login import login_required, current_user
 
 follow_routes = Blueprint('follows', __name__)
 
+
+@follow_routes.route('/')
+def get_follows():
+  user = User.query.get(current_user.id)
+  follow = {
+    'followers': [ user.to_dict() for user in user.followers ],
+    'following': [ user.to_dict() for user in user.following ]
+  }
+  return jsonify(follow)
+
+
 @follow_routes.route('/', methods=['POST'])
 @login_required
 def follow():
