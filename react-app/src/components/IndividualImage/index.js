@@ -16,43 +16,58 @@ const IndividualImage = () => {
   const history = useHistory();
   const { id } = useParams(); //image ID
 
-  useEffect(() => {
-    dispatch(imageActions.loadOneImageThunk(id))
-    dispatch(commentActions.loadCommentsThunk(id))
-    dispatch(likeActions.loadLikesThunk())
-  }, [dispatch, id])
+
 
   const user = useSelector(state => state.session.user)
   const images = useSelector(state => state?.images)
   const imageData = images[id]
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
+  // const allLikes = useSelector(state => state.likes)
+  // const allLikesArr = Object.values(allLikes)
+  // const likes = allLikesArr.filter((like) => {
+  //   return like?.imageId === imageData?.id
+  // })
+  console.log('image', images)
+  console.log('imagedata', imageData)
+
+  // console.log('user', user.likes)
+  // console.log('imageData', imageData)
+  const [likeId, setLikeId] = useState(0)
+
+
+  useEffect(() => {
+    dispatch(imageActions.loadOneImageThunk(id))
+    dispatch(commentActions.loadCommentsThunk(id))
+    dispatch(likeActions.loadLikesThunk())
+  }, [dispatch, id])
+
   const allLikes = useSelector(state => state.likes)
   const allLikesArr = Object.values(allLikes)
   const likes = allLikesArr.filter((like) => {
     return like?.imageId === imageData?.id
   })
+  let like = likes?.find((like) => {
+    return user.id === like.userId
+  })
 
-  console.log('user', user.likes)
-  console.log('imageData', imageData)
-  const [likeId, setLikeId] = useState(0)
+  console.log('LIKESSSSSSSSSSSSSSSSSSSSSSSSS', likes)
+  console.log('filtered like', like)
 
-  let like;
 
-  useEffect(() => {
-    if(images) {
-      like = imageData?.likes?.filter((like) => {
-        return user.id === like.userId
-      })
-    }
-    if(like) {
-      setLikeId(like[0]?.id)
-      console.log('STATE HAS CHANGED. SECOND IF')
-      console.log('STATE HAS CHANGED like', like)
-      console.log('STATE HAS CHANGED likeId', likeId)
-      console.log('STATE HAS CHANGED like[0]', like[0])
-    }
-  }, [imageData, user?.id, images, like, allLikes, allLikesArr, likes])
+  // useEffect(() => {
+
+    // let like = imageData?.likes?.find((like) => {
+    //   return user.id === like.userId
+    // })
+
+  //   console.log('HIT-------', like)
+
+  //   setLikeId(like?.id)
+  //   console.log('STATE HAS CHANGED. SECOND IF')
+  //   console.log('STATE HAS CHANGED like', like)
+  //   console.log('STATE HAS CHANGED likeId', likeId)
+  // }, [dispatch])
 
   // const handleLike =  e => {
   //   e.preventDefault()
@@ -92,12 +107,14 @@ const IndividualImage = () => {
           </ul>
         ))}
         <p>{likes?.length} likes</p>
+
+
           <button type='button' onClick={() => {
             dispatch(likeActions.postLikeThunk(imageData?.id))
           }}>Like</button>
 
         <button type='button' onClick={() => {
-            dispatch(likeActions.deleteLikeThunk(likeId))
+            dispatch(likeActions.deleteLikeThunk(like?.id))
         }}>Remove like</button>
         <PostComment />
       </div>

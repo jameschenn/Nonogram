@@ -16,6 +16,7 @@ import SessionUserProfile from './components/SessionUserProfile';
 import UploadImage from './components/UploadImage';
 import PostComment from './components/PostComment'
 import EditProfileForm from './components/EditProfile';
+import ErrorPage from './components/ErrorsPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -66,6 +67,9 @@ function App() {
         <ProtectedRoute path='/' exact={true} >
           <AllImages />
         </ProtectedRoute>
+        <Route path="*">
+          <ErrorPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

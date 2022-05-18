@@ -33,6 +33,7 @@ const SignUpForm = () => {
     if (!password) validateErrors.push('Please Provide a valid password')
     if (!repeatPassword) validateErrors.push('Please confirm your password')
     if (password !== repeatPassword) validateErrors.push('Passwords must match. Please try again')
+    if(!image) validateErrors.push('Please provide a valid image for your profile picture')
     if(validateErrors.length > 0) {
       setFrontEndErrors(validateErrors)
       setHasSubmitted(true);

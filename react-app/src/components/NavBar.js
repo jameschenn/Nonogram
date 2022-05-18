@@ -15,10 +15,10 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
-              Nonogram
+              <span style={{fontWeight: 'bold'}}>Nonogram</span>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to='/login' exact={true} activeClassName='active'>
               Login
             </NavLink>
@@ -32,7 +32,9 @@ const NavBar = () => {
             <NavLink to='/users' exact={true} activeClassName='active'>
               Users
             </NavLink>
-          </li>
+          </li> */}
+          {sessionUser && (
+          <>
           <li>
             <NavLink to='/images/upload' exact={true} activeClassName='active'>
               Add Image
@@ -41,6 +43,8 @@ const NavBar = () => {
           <li>
             <LogoutButton />
           </li>
+          </>
+          )}
         </ul>
       </div>
     </nav>
