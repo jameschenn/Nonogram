@@ -11,9 +11,6 @@ function PostComment() {
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
-  const reviews = useSelector(state => state.reviews)
-  console.log('REVIEWS', reviews)
-
 
 
   const [comment, setComment] = useState('')
@@ -29,6 +26,7 @@ function PostComment() {
     }
 
     await dispatch(commentActions.addCommentThunk(new_comment, images[id].id))
+    setComment('')
   }
 
   return (
@@ -41,7 +39,7 @@ function PostComment() {
             onChange={e => setComment(e.target.value)}
           />
         </div>
-        <button type="submit">Submit Comment</button>
+        <button type="submit" disabled={comment < 1}>Submit Comment</button>
       </form>
     </section>
   )

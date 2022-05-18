@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
+import * as likeActions from '../../store/likes';
 import PostComment from "../PostComment";
 import EditImageForm from "../EditImage/index";
 import EditCommentForm from '../EditComment/index';
@@ -18,6 +19,7 @@ const IndividualImage = () => {
   useEffect(() => {
     dispatch(imageActions.loadOneImageThunk(id))
     dispatch(commentActions.loadCommentsThunk(id))
+    dispatch(likeActions.loadLikesThunk())
   }, [dispatch, id])
 
   const user = useSelector(state => state.session.user)
@@ -25,11 +27,41 @@ const IndividualImage = () => {
   const imageData = images[id]
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
+  const allLikes = useSelector(state => state.likes)
+  const allLikesArr = Object.values(allLikes)
+  const likes = allLikesArr.filter((like) => {
+    return like?.imageId === imageData?.id
+  })
 
-  console.log('USER', user.id, commentsData.userId)
+  console.log('user', user.likes)
   console.log('imageData', imageData)
-  console.log('comment', commentsData)
+  const [likeId, setLikeId] = useState(0)
 
+  let like;
+
+  useEffect(() => {
+    if(images) {
+      like = imageData?.likes?.filter((like) => {
+        return user.id === like.userId
+        console.log('STATE HAS CHANGED. FIRST IF')
+      })
+    }
+    if(like) {
+      setLikeId(like[0]?.id)
+      console.log('STATE HAS CHANGED. SECOND IF')
+      console.log('STATE HAS CHANGED like', like)
+      console.log('STATE HAS CHANGED likeId', likeId)
+      console.log('STATE HAS CHANGED like[0]', like[0])
+    }
+  }, [imageData, user?.id, images, like, allLikes, allLikesArr, likes])
+
+  // const handleLike =  e => {
+  //   e.preventDefault()
+  //   if()
+  // }
+
+  console.log('likeId', likeId)
+  console.log('imageData', imageData?.id)
   return (
     <>
     <div className='post-container'>
@@ -60,6 +92,14 @@ const IndividualImage = () => {
             )} */}
           </ul>
         ))}
+        <p>{likes?.length} likes</p>
+          <button type='button' onClick={() => {
+            dispatch(likeActions.postLikeThunk(imageData?.id))
+          }}>Like</button>
+
+        <button type='button' onClick={() => {
+            dispatch(likeActions.deleteLikeThunk(likeId))
+        }}>Remove like</button>
         <PostComment />
       </div>
       <div>
