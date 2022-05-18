@@ -43,7 +43,6 @@ const IndividualImage = () => {
     if(images) {
       like = imageData?.likes?.filter((like) => {
         return user.id === like.userId
-        console.log('STATE HAS CHANGED. FIRST IF')
       })
     }
     if(like) {
