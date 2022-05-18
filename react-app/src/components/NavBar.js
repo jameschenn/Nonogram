@@ -34,6 +34,11 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to='/images/upload' exact={true} activeClassName='active'>
+              Add Image
+            </NavLink>
+          </li>
+          <li>
             <LogoutButton />
           </li>
         </ul>

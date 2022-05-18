@@ -26,6 +26,7 @@ function PostComment() {
     }
 
     await dispatch(commentActions.addCommentThunk(new_comment, images[id].id))
+    setComment('')
   }
 
   return (
@@ -38,7 +39,7 @@ function PostComment() {
             onChange={e => setComment(e.target.value)}
           />
         </div>
-        <button type="submit">Submit Comment</button>
+        <button type="submit" disabled={comment < 1}>Submit Comment</button>
       </form>
     </section>
   )
