@@ -18,6 +18,7 @@ function UploadImage() {
 
   useEffect(() => {
     const errors = [];
+    const fileType = ['']
     if(!image) errors.push('Please choose an image first before uploading')
     setErrors(errors)
   }, [image])
@@ -59,6 +60,7 @@ function UploadImage() {
           <input
             type='file'
             onChange={updateImage}
+            accept='image/jpeg, image/jpg, image/png'
           />
         </div>
         <div>

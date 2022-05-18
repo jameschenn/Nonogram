@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -6,6 +6,8 @@ import './SignUpForm.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const [frontEndErrors, setFrontEndErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('')
@@ -19,23 +21,26 @@ const SignUpForm = () => {
 
   const emailValidator = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
-  // useEffect(() => {
-  //   const errors = [];
-
-  //   if (username.length < 1) errors.push('Please enter a valid username')
-  //   if (firstName.length < 1) errors.push('Please provide a valid first name')
-  //   if (lastName.length < 1) errors.push('Please provide a valid last name')
-  //   if (!(email.match(emailValidator))) errors.push('Please provide a valid e-mail')
-  //   if () errors.push()
-  //   if () errors.push()
-  //   if () errors.push()
-  //   if () errors.push()
-  //   if () errors.push()
-  //   setErrors(errors)
-  // }, [])
-
   const onSignUp = async (e) => {
     e.preventDefault();
+
+    const validateErrors = [];
+
+    if (!username) validateErrors.push('Please enter a valid username')
+    if (!firstName) validateErrors.push('Please provide a valid first name')
+    if (!lastName) validateErrors.push('Please provide a valid last name')
+    if (!(email.match(emailValidator))) validateErrors.push('Please provide a valid e-mail')
+    if (!password) validateErrors.push('Please Provide a valid password')
+    if (!repeatPassword) validateErrors.push('Please confirm your password')
+    if (password !== repeatPassword) validateErrors.push('Passwords must match. Please try again')
+    if(validateErrors.length > 0) {
+      setFrontEndErrors(validateErrors)
+      setHasSubmitted(true);
+      return
+    }
+
+
+    if (frontEndErrors.length > 0) return;
 
     const new_user = {
       username,
@@ -54,6 +59,33 @@ const SignUpForm = () => {
       }
     }
   };
+
+
+
+  // const onSignUp = async (e) => {
+  //   e.preventDefault();
+
+  //   setHasSubmitted(true);
+
+  //   if(errors.length > 0) return;
+
+  //   const new_user = {
+  //     username,
+  //     firstName,
+  //     lastName,
+  //     email,
+  //     password,
+  //     bio,
+  //     image
+  //   }
+
+  //   if (password === repeatPassword) {
+  //     const data = await dispatch(signUp(new_user));
+  //     if (data) {
+  //       setErrors(data)
+  //     }
+  //   }
+  // };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -97,13 +129,18 @@ const SignUpForm = () => {
     <div className='signUpForm'>
       <div className='signUp-container'>
         <form onSubmit={onSignUp}>
+          <h2>Nonogram</h2>
+          <h4>Sign up to see photos from your friends.</h4>
           <div>
-            {errors.map((error, ind) => (
+            {hasSubmitted && errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <h2>Nonogram</h2>
-          <h4>Sign up to see photos from your friends.</h4>
+          <div>
+            {hasSubmitted && frontEndErrors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
           <div>
             <input
               type='text'
