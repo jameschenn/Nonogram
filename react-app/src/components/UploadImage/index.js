@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images'
+import './UploadImage.css';
 
 function UploadImage() {
 
@@ -52,6 +53,10 @@ function UploadImage() {
 
   return (
     <section>
+      <div id='preview-div'>
+        {image ? <img src={URL.createObjectURL(image)} alt='upload-preview' id='upload-preview' /> : <h1 id='upload-file'>Upload a file...</h1>}
+      </div>
+      <div className="upload-form">
       <form onSubmit={handleSubmit}>
         {hasSubmitted && errors.map((error, idx) => (
           <li key={idx}>{error}</li>
@@ -73,6 +78,7 @@ function UploadImage() {
         <button type='submit'>Upload Image</button>
         <button type="button" onClick={handleCancelClick}>Cancel</button>
       </form>
+    </div>
     </section>
   )
 }

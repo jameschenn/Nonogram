@@ -1,0 +1,18 @@
+/* .preview-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid green;
+}
+
+.upload-preview {
+  border: solid 2px purple;
+} */
+
+
+.upload-form {
+  display: flex;
+  flex-direction: row;
+  background-color: aqua;
+}

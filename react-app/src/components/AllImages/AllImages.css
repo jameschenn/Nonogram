@@ -10,7 +10,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: solid 2px green;
+  border: solid 1px lightgray;
+  width: 50%;
+  margin: auto;
+  background-color: white;
+  margin-top: 30px;
 }
 
 .img-feed-card li {
@@ -27,7 +31,3 @@
   object-fit: cover;
   vertical-align: bottom;
 }
-
-/* .img-feed-card img:hover {
-  box-shadow: 5px 10px 18px #888888;
-} */
