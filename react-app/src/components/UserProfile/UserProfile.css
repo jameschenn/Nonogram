@@ -11,6 +11,7 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   flex-grow: 1;
+  padding-left: 15px;
 }
 
 .profile-img-cards {
@@ -23,6 +24,8 @@ body {
   width: 300px;
   object-fit: cover;
   vertical-align: bottom;
+  padding-left: 1.5rem;
+  padding-bottom: 25px;
 }
 
 .profile-header {
@@ -31,6 +34,8 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  margin-top: 25px;
+  margin-bottom: 15px;
 }
 
 .profile-info {
