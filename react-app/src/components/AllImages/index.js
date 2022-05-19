@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments'
+import * as likeActions from '../../store/likes';
+
 import './AllImages.css'
 
 const AllImages = () => {
@@ -15,12 +17,14 @@ const AllImages = () => {
   const images = useSelector(state => state.images);
   const imageData = Object.values(images)
   const comments = useSelector(state => state.comments)
-  console.log('IMAGE DATA', imageData)
+  const allLikes = useSelector(state => state.likes);
+  const allLikesArr = Object.values(allLikes)
 
   useEffect(async () => {
     await dispatch(imageActions.loadAllImagesThunk())
     await dispatch(commentActions.loadCommentsThunk(id))
-  }, [dispatch])
+    await dispatch(likeActions.loadLikesThunk())
+  }, [dispatch, id])
 
 
 
