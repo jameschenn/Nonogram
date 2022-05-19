@@ -23,11 +23,6 @@ const IndividualImage = () => {
   const imageData = images[id]
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
-  // const allLikes = useSelector(state => state.likes)
-  // const allLikesArr = Object.values(allLikes)
-  // const likes = allLikesArr.filter((like) => {
-  //   return like?.imageId === imageData?.id
-  // })
 
   const [likeId, setLikeId] = useState(0)
 
@@ -71,8 +66,6 @@ const IndividualImage = () => {
     }
   }
 
-  console.log('comment data', commentsData)
-
   return (
     <>
       <div className='post-container'>
@@ -107,15 +100,6 @@ const IndividualImage = () => {
                     </Popup>
                   </>
                 )}</li>
-                {/* {user?.id === comment?.userId && (
-              <>
-              <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
-                <p>Edit Your Caption</p>
-                <EditCommentForm commentId={comment} />
-                <button type='button' onClick={() => {dispatch(commentActions.deleteCommentThunk(comment.id))}}> Delete Comment</button>
-              </Popup>
-            </>
-            )} */}
               </ul>
             ))}
           </div>
@@ -126,32 +110,11 @@ const IndividualImage = () => {
                 <button onClick={handleLike}>🤍</button>
                 )}
               <p>{likes?.length} likes</p>
-            {/* <button type='button' onClick={() => {
-            dispatch(likeActions.postLikeThunk(imageData?.id))
-          }}>Like</button>
-
-        <button type='button' onClick={() => {
-            dispatch(likeActions.deleteLikeThunk(like?.id))
-        }}>Remove like</button> */}
           <div className="individual-post-comment">
             <PostComment />
           </div>
           </div>
         </div>
-        {/* <div>
-          {user?.id === imageData?.userId && (
-            <>
-              <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
-                <p>Edit Your Caption</p>
-                <EditImageForm imageId={imageData?.id} />
-                <p>Delete Your Image</p>
-                <button type='button' onClick={() => {
-                  dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
-                }}>Delete</button>
-              </Popup>
-            </>
-          )}
-        </div> */}
       </div>
     </>
   )
