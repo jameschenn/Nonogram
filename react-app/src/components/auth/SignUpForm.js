@@ -192,6 +192,9 @@ const SignUpForm = () => {
             ></input>
           </div>
           <button type='submit'>Sign Up</button>
+          <div className='new-user'>
+            <p>Forgot you had an account? <a href={`/login`}>Log in!</a></p>
+          </div>
         </form>
     </div>
   </div>
