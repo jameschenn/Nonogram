@@ -15,10 +15,10 @@ const NavBar = () => {
         <ul>
           <li>
             <NavLink to='/' exact={true} activeClassName='active'>
-              Nonogram
+              <span style={{fontWeight: 'bold'}}>Nonogram</span>
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to='/login' exact={true} activeClassName='active'>
               Login
             </NavLink>
@@ -32,15 +32,38 @@ const NavBar = () => {
             <NavLink to='/users' exact={true} activeClassName='active'>
               Users
             </NavLink>
-          </li>
+          </li> */}
+          {sessionUser && (
+          <>
           <li>
             <NavLink to='/images/upload' exact={true} activeClassName='active'>
-              Add Image
+              <i class="fa-solid fa-circle-plus"></i>
             </NavLink>
           </li>
           <li>
+          {/* <div>
+            <details>
+              <summary>Test</summary>
+              <a href={`/me`}>Profile</a>
+              <a href={`/me/edit`}>Settings</a>
             <LogoutButton />
+            </details>
+          </div> */}
+
+
+
+
+          <div class='profile-dropdown'>
+            <button><img src={sessionUser?.profilePictureUrl} alt={sessionUser?.username} /></button>
+              <div class="dropdown-content">
+                    <a href={`/me`}>Profile <i class="fa-solid fa-user"></i></a>
+                    <a href={`/me/edit`}>Settings <i class="fa-solid fa-gear"></i></a>
+                <LogoutButton />
+              </div>
+          </div>
           </li>
+          </>
+          )}
         </ul>
       </div>
     </nav>

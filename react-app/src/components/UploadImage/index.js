@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images'
+import './UploadImage.css';
 
 function UploadImage() {
 
@@ -52,27 +53,41 @@ function UploadImage() {
 
   return (
     <section>
-      <form onSubmit={handleSubmit}>
-        {hasSubmitted && errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-        <div>
-          <input
-            type='file'
-            onChange={updateImage}
-            accept='image/jpeg, image/jpg, image/png'
-          />
-        </div>
-        <div>
-          <input
-            type='text'
-            value={caption}
-            onChange={e => setCaption(e.target.value)}
-          />
-        </div>
-        <button type='submit'>Upload Image</button>
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
-      </form>
+      <div className='preview-div'>
+        {image ? <img src={URL.createObjectURL(image)} alt='upload-preview' className='upload-preview' /> : <h1 id='upload-file'>Upload a file...</h1>}
+      </div>
+      <div className="upload-form">
+        <form onSubmit={handleSubmit}>
+          <div className="error-div">
+          {hasSubmitted && errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+          </div>
+          <div className='image-upload-div'>
+            <label for='image-upload'>
+              Upload Image <br/> <i class="fa-solid fa-camera"></i>
+            <input
+              id='image-upload'
+              type='file'
+              onChange={updateImage}
+              accept='image/jpeg, image/jpg, image/png'
+            />
+            </label>
+          </div>
+          <div className='caption-upload'>
+            <input
+              type='text'
+              placeholder='Add a caption'
+              value={caption}
+              onChange={e => setCaption(e.target.value)}
+            />
+          </div>
+          <div className='upload-buttons'>
+          <button type='submit'>Upload Image</button>
+          <button type="button" onClick={handleCancelClick}>Cancel</button>
+          </div>
+        </form>
+      </div>
     </section>
   )
 }

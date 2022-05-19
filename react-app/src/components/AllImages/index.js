@@ -30,7 +30,9 @@ const AllImages = () => {
       <div className='img-feed-card'>
         <ul>
           <li><a href={`/users/${image.userId}`}><img src={image?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{ marginLeft: '25px' }} /></a> <span style={{fontWeight:'bold', marginLeft: '15px'}}>{image?.user?.username}</span></li>
+        <div className="all-image-container">
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
+        </div>
           <li> <span style={{ fontWeight: 'bold', marginLeft:'25px', marginRight: '15px' }}>{image?.user?.username}</span> {image?.caption}</li>
           <li>{image?.likes.length} likes</li>
         </ul>

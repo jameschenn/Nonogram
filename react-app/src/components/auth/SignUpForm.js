@@ -33,6 +33,7 @@ const SignUpForm = () => {
     if (!password) validateErrors.push('Please Provide a valid password')
     if (!repeatPassword) validateErrors.push('Please confirm your password')
     if (password !== repeatPassword) validateErrors.push('Passwords must match. Please try again')
+    if(!image) validateErrors.push('Please provide a valid image for your profile picture')
     if(validateErrors.length > 0) {
       setFrontEndErrors(validateErrors)
       setHasSubmitted(true);
@@ -59,8 +60,6 @@ const SignUpForm = () => {
       }
     }
   };
-
-
 
   // const onSignUp = async (e) => {
   //   e.preventDefault();
@@ -131,12 +130,13 @@ const SignUpForm = () => {
         <form onSubmit={onSignUp}>
           <h2>Nonogram</h2>
           <h4>Sign up to see photos from your friends.</h4>
-          <div>
-            {hasSubmitted && errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+          <div className='error-div'>
+            {errors.map((error, ind) => (
+              <div key={ind} className='errors'>{error}</div>
+
             ))}
           </div>
-          <div>
+          <div className='error-div'>
             {hasSubmitted && frontEndErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}

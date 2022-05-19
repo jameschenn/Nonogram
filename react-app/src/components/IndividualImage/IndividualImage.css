@@ -5,12 +5,14 @@
   object-fit: cover;
   vertical-align: bottom;
   border: solid lightgray 2px;
+  padding: 2px;
 }
 
 .post-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .post-info {
@@ -18,17 +20,87 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: flex-start;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 10px;
+
+}
+
+.post-info p {
+  width: 500px;
+  padding: 1px;
+}
+
+.post-info a {
+  text-decoration: none;
+  color: black;
 }
 
 .post-info ul {
   list-style-type: none;
 }
 
+
+.individual-comments {
+  margin-top: 10px;
+  border-top: solid 1px lightgray;
+  padding-top: 15px;
+
+  width: 500px;
+  height: 325px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+
+.individual-comments li {
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.individual-likes-and-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: flex-start;
+  border-top: solid 1px lightgray;
+  margin-top: 30px;
+  padding: 5px;
+}
+
+.individual-likes-and-comment button {
+  border: none;
+  background-color: whitesmoke;
+}
+
+.individual-post-comment {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.individual-post-comment form input {
+  width: 500px;
+  height: 20px;
+}
+
+.post-image {
+
+  display: flex;
+  justify-content: center;
+  height: 600px;
+  width: 55%;
+  background-color: lightgray;
+  margin-left: 30px;
+}
+
 .post-image img {
     border-radius: 0px;
-      height: 600px;
-      width: 600px;
-      object-fit: cover;
+      max-height: 100%;
+      max-width: 100%;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      /* object-fit: cover; */
       vertical-align: bottom;
 }
 
@@ -40,6 +112,32 @@
   padding: 10px;
   margin-left: 20px;
   border: solid 1px lightgray;
+}
+
+.popup-content button {
+    border: none;
+    color: white;
+    background-color: cadetblue;
+    padding: 5px;
+    width: 12rem;
+    margin-top: 10px;
+    margin-bottom: 5px;
+
+}
+
+.popup-content button:hover {
+  border: 2px solid cadetblue;
+  color: cadetblue;
+  background-color: white;
+}
+
+.popup-content p {
+  text-align: center;
+}
+
+.popup-content input {
+  width: 11.5rem;
+  margin-top: 10px;
 }
 
 [role='tooltip'].popup-content {

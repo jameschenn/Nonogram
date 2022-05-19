@@ -27,6 +27,7 @@ const SessionUserProfile = () => {
         <img src={sessionUser?.profilePictureUrl} alt={sessionUser?.username} className='user-profile-icon' />
         <div className="username">
           <h1>{sessionUser?.username}</h1>
+          <p>{sessionUser?.firstName} {sessionUser?.lastName}</p>
         </div>
         <div className='profile-info'>
           <h4>{imageData.length} Posts</h4>
