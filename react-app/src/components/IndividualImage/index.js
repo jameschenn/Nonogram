@@ -80,24 +80,39 @@ const IndividualImage = () => {
   console.log('imageData', imageData?.id)
   return (
     <>
-    <div className='post-container'>
-      <div className='post-image'>
-        <img src={imageData?.imageUrl} alt='post'/>
-      </div>
-      <div className='post-info'>
-          <p><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{imageData?.user?.username}</span> {imageData?.caption}</p>
-        {commentsData.map((comment, idx) => (
-          <ul>
-            <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment} {user?.id === comment?.userId && (
-              <>
-                <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
-                  <p>Edit Your Caption</p>
-                  <EditCommentForm commentId={comment} />
-                  <button type='button' onClick={() => { dispatch(commentActions.deleteCommentThunk(comment.id)) }}> Delete Comment</button>
-                </Popup>
-              </>
-            )}</li>
-            {/* {user?.id === comment?.userId && (
+      <div className='post-container'>
+        <div className='post-image'>
+          <img src={imageData?.imageUrl} alt='post' />
+        </div>
+        <div className='post-info'>
+          <p><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span>
+              {user?.id === imageData?.userId && (
+                <>
+                  <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+                    <p>Edit Your Caption</p>
+                    <EditImageForm imageId={imageData?.id} />
+                    <p>Delete Your Image</p>
+                    <button type='button' onClick={() => {
+                      dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
+                    }}>Delete</button>
+                  </Popup>
+                </>
+              )}
+            </p>
+          <p style={{marginTop: '10px'}}>{imageData?.caption}</p>
+          <div className='individual-comments'>
+            {commentsData.map((comment, idx) => (
+              <ul>
+                <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment} {user?.id === comment?.userId && (
+                  <>
+                    <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+                      <p>Edit Your Caption</p>
+                      <EditCommentForm commentId={comment} />
+                      <button type='button' onClick={() => { dispatch(commentActions.deleteCommentThunk(comment.id)) }}> Delete Comment</button>
+                    </Popup>
+                  </>
+                )}</li>
+                {/* {user?.id === comment?.userId && (
               <>
               <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                 <p>Edit Your Caption</p>
@@ -106,39 +121,43 @@ const IndividualImage = () => {
               </Popup>
             </>
             )} */}
-          </ul>
-        ))}
-        <p>{likes?.length} likes</p>
-
-        {like ? (
-            <button onClick={handleLike}>❤️</button>
-        ): (
-              <button onClick={handleLike}>🤍</button>
-        )}
-          {/* <button type='button' onClick={() => {
+              </ul>
+            ))}
+          </div>
+          <div className="individual-likes-and-comment">
+            {like ? (
+              <button onClick={handleLike}>❤️</button>
+              ) : (
+                <button onClick={handleLike}>🤍</button>
+                )}
+              <p>{likes?.length} likes</p>
+            {/* <button type='button' onClick={() => {
             dispatch(likeActions.postLikeThunk(imageData?.id))
           }}>Like</button>
 
         <button type='button' onClick={() => {
             dispatch(likeActions.deleteLikeThunk(like?.id))
         }}>Remove like</button> */}
-        <PostComment />
-      </div>
-      <div>
-        {user?.id === imageData?.userId && (
-          <>
+          <div className="individual-post-comment">
+            <PostComment />
+          </div>
+          </div>
+        </div>
+        {/* <div>
+          {user?.id === imageData?.userId && (
+            <>
               <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
-            <p>Edit Your Caption</p>
+                <p>Edit Your Caption</p>
                 <EditImageForm imageId={imageData?.id} />
                 <p>Delete Your Image</p>
                 <button type='button' onClick={() => {
                   dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
                 }}>Delete</button>
-          </Popup>
+              </Popup>
             </>
           )}
+        </div> */}
       </div>
-    </div>
     </>
   )
 }
