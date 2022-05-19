@@ -41,7 +41,26 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+          {/* <div>
+            <details>
+              <summary>Test</summary>
+              <a href={`/me`}>Profile</a>
+              <a href={`/me/edit`}>Settings</a>
             <LogoutButton />
+            </details>
+          </div> */}
+
+
+
+
+          <div class='profile-dropdown'>
+            <button><img src={sessionUser?.profilePictureUrl} alt={sessionUser?.username} /></button>
+              <div class="dropdown-content">
+                    <a href={`/me`}>Profile <i class="fa-solid fa-user"></i></a>
+                    <a href={`/me/edit`}>Settings <i class="fa-solid fa-gear"></i></a>
+                <LogoutButton />
+              </div>
+          </div>
           </li>
           </>
           )}
