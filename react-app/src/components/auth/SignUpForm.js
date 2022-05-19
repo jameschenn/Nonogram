@@ -6,7 +6,7 @@ import './SignUpForm.css'
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
-  const [frontEndErrors, setFrontEndErrors] = useState([]);
+  // const [frontEndErrors, setFrontEndErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -24,24 +24,24 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
 
-    const validateErrors = [];
+    // const validateErrors = [];
 
-    if (!username) validateErrors.push('Please enter a valid username')
-    if (!firstName) validateErrors.push('Please provide a valid first name')
-    if (!lastName) validateErrors.push('Please provide a valid last name')
-    if (!(email.match(emailValidator))) validateErrors.push('Please provide a valid e-mail')
-    if (!password) validateErrors.push('Please Provide a valid password')
-    if (!repeatPassword) validateErrors.push('Please confirm your password')
-    if (password !== repeatPassword) validateErrors.push('Passwords must match. Please try again')
-    if(!image) validateErrors.push('Please provide a valid image for your profile picture')
-    if(validateErrors.length > 0) {
-      setFrontEndErrors(validateErrors)
-      setHasSubmitted(true);
-      return
-    }
+    // if (!username) validateErrors.push('Please enter a valid username')
+    // if (!firstName) validateErrors.push('Please provide a valid first name')
+    // if (!lastName) validateErrors.push('Please provide a valid last name')
+    // if (!(email.match(emailValidator))) validateErrors.push('Please provide a valid e-mail')
+    // if (!password) validateErrors.push('Please Provide a valid password')
+    // if (!repeatPassword) validateErrors.push('Please confirm your password')
+    // if (password !== repeatPassword) validateErrors.push('Passwords must match. Please try again')
+    // if(!image) validateErrors.push('Please provide a valid image for your profile picture')
+    // if(validateErrors.length > 0) {
+    //   setFrontEndErrors(validateErrors)
+    //   setHasSubmitted(true);
+    //   return
+    // }
 
 
-    if (frontEndErrors.length > 0) return;
+    // if (frontEndErrors.length > 0) return;
 
     const new_user = {
       username,
@@ -58,33 +58,11 @@ const SignUpForm = () => {
       if (data) {
         setErrors(data)
       }
+    } else {
+      return setErrors(['Passwords don\'t match. Please try again.'])
     }
   };
 
-  // const onSignUp = async (e) => {
-  //   e.preventDefault();
-
-  //   setHasSubmitted(true);
-
-  //   if(errors.length > 0) return;
-
-  //   const new_user = {
-  //     username,
-  //     firstName,
-  //     lastName,
-  //     email,
-  //     password,
-  //     bio,
-  //     image
-  //   }
-
-  //   if (password === repeatPassword) {
-  //     const data = await dispatch(signUp(new_user));
-  //     if (data) {
-  //       setErrors(data)
-  //     }
-  //   }
-  // };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -136,11 +114,11 @@ const SignUpForm = () => {
 
             ))}
           </div>
-          <div className='error-div'>
+          {/* <div className='error-div'>
             {hasSubmitted && frontEndErrors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
-          </div>
+          </div> */}
           <div>
             <input
               type='text'
