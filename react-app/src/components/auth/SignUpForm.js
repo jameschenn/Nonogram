@@ -61,8 +61,6 @@ const SignUpForm = () => {
     }
   };
 
-
-
   // const onSignUp = async (e) => {
   //   e.preventDefault();
 
@@ -133,8 +131,9 @@ const SignUpForm = () => {
           <h2>Nonogram</h2>
           <h4>Sign up to see photos from your friends.</h4>
           <div className='error-div'>
-            {hasSubmitted && errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
+            {errors.map((error, ind) => (
+              <div key={ind} className='errors'>{error}</div>
+
             ))}
           </div>
           <div className='error-div'>
