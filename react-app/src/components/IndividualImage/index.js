@@ -48,11 +48,6 @@ const IndividualImage = () => {
   })
 
 
-
-  console.log('LIKESSSSSSSSSSSSSSSSSSSSSSSSS', likes)
-  console.log('filtered like', like)
-
-
   // useEffect(() => {
 
     // let like = imageData?.likes?.find((like) => {
@@ -76,8 +71,8 @@ const IndividualImage = () => {
     }
   }
 
-  console.log('likeId', likeId)
-  console.log('imageData', imageData?.id)
+  console.log('comment data', commentsData)
+
   return (
     <>
       <div className='post-container'>
@@ -85,7 +80,7 @@ const IndividualImage = () => {
           <img src={imageData?.imageUrl} alt='post' />
         </div>
         <div className='post-info'>
-          <p><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span>
+          <p><a href={`/users/${imageData?.userId}`}><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span></a>
               {user?.id === imageData?.userId && (
                 <>
                   <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
@@ -103,7 +98,7 @@ const IndividualImage = () => {
           <div className='individual-comments'>
             {commentsData.map((comment, idx) => (
               <ul>
-                <li> <img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span> {comment.comment} {user?.id === comment?.userId && (
+                <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span></a> {comment.comment} {user?.id === comment?.userId && (
                   <>
                     <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                       <p>Edit Your Caption</p>
