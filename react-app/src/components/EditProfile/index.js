@@ -63,7 +63,7 @@ const EditProfileForm = () => {
           ))}
         </div>
         <div>
-          <label>First Name</label>
+          <label>First Name (required)</label>
           <input
             type="text"
             value={firstName}
@@ -71,7 +71,7 @@ const EditProfileForm = () => {
           />
         </div>
         <div>
-          <label>Last Name</label>
+          <label>Last Name (required)</label>
           <input
             type="text"
             value={lastName}

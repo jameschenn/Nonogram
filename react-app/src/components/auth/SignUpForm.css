@@ -73,3 +73,21 @@
   text-align: center;
   margin-top: 15px;
 }
+
+input[type="file"]::file-selector-button {
+  background-color: cadetblue;
+  color: white;
+  border: none;
+  margin-top: 4px;
+  margin-left: 5px;
+}
+
+input[type="file"]::file-selector-button:hover {
+  border: 0.5px solid cadetblue;
+    color: cadetblue;
+    background-color: white;
+}
+
+input[type="file"] {
+  color: gray;
+}

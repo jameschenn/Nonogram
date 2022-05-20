@@ -123,7 +123,7 @@ const SignUpForm = () => {
             <input
               type='text'
               name='username'
-              placeholder='Username'
+              placeholder='Username (required)'
               onChange={updateUsername}
               value={username}
             ></input>
@@ -132,7 +132,7 @@ const SignUpForm = () => {
             <input
               type='text'
               name='firstName'
-              placeholder='First Name'
+              placeholder='First Name (required)'
               onChange={updateFirstName}
               value={firstName}
             ></input>
@@ -140,7 +140,7 @@ const SignUpForm = () => {
           <div>
             <input
               type='text'
-              name='lastName'placeholder='Last Name'
+              name='lastName'placeholder='Last Name (required)'
               onChange={updateLastName}
               value={lastName}
             ></input>
@@ -155,9 +155,10 @@ const SignUpForm = () => {
             ></input>
           </div>
           <div>
-            <label>Upload a Profile Picture</label>
+            <label>Upload a Profile Picture (required)</label>
             <input
               type='file'
+              className='file-selector-button'
               name='image'
               onChange={updateImage}
               accept='image/jpeg, image/jpg, image/png'
@@ -167,7 +168,7 @@ const SignUpForm = () => {
             <input
               type='text'
               name='email'
-              placeholder='E-mail'
+              placeholder='E-mail (required)'
               onChange={updateEmail}
               value={email}
             ></input>
@@ -176,7 +177,7 @@ const SignUpForm = () => {
             <input
               type='password'
               name='password'
-              placeholder='Password'
+              placeholder='Password (required)'
               onChange={updatePassword}
               value={password}
             ></input>
@@ -185,7 +186,7 @@ const SignUpForm = () => {
             <input
               type='password'
               name='repeat_password'
-              placeholder='Confirm Password'
+              placeholder='Confirm Password (required again)'
               onChange={updateRepeatPassword}
               value={repeatPassword}
               required={true}

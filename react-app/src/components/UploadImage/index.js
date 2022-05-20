@@ -65,7 +65,7 @@ function UploadImage() {
           </div>
           <div className='image-upload-div'>
             <label for='image-upload'>
-              Upload Image <br/> <i class="fa-solid fa-camera"></i>
+              Upload Image <br/> (required) <br/> <i class="fa-solid fa-camera"></i>
             <input
               id='image-upload'
               type='file'
