@@ -19,22 +19,23 @@ def get_follows():
 @login_required
 def follow():
 
-  sessionUser = User.query.get(current_user.id)
+  # sessionUser = User.query.get(current_user.id)
   follow_id = request.json['userId']
   follow = User.query.get(follow_id)
 
-  sessionUser.followedId.append(follow_id)
+  current_user.following.append(follow)
   db.session.commit()
   return {'following': follow.to_dict()}
+
 
 @follow_routes.route('/', methods=['DELETE'])
 def unfollow():
 
-  sessionUser = User.query.get(current_user.id)
+  # sessionUser = User.query.get(current_user.id)
   followed_id = request.json['userId']
-  followed = User.query.get(follow_id)
+  followed = User.query.get(followed_id)
 
-  sessionUser.followedId.remove(followed_id)
+  current_user.following.remove(followed)
   db.session.commit()
 
   return {'Unfollowed': follow.to_dict()}

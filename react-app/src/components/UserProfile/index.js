@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
+import * as followActions from '../../store/follows';
 // import EditImageForm from "../EditImage/index";
 import './UserProfile.css'
 
@@ -12,10 +13,13 @@ const UserProfile = () => {
   const [user, setUser] = useState({});
   const { id } = useParams(); //user Id
 
+  console.log('IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', id)
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
+
+
 
   useEffect(() => {
     if (!id) {
@@ -48,6 +52,22 @@ const UserProfile = () => {
         <h4>{imageData.length} Posts</h4>
         <h4>{user?.followers?.length} Followers</h4>
         <h4>{user?.following?.length} Followers</h4>
+
+        <button onClick={() => {
+          dispatch(followActions.followUserThunk(id))
+        }}>Follow</button>
+
+        <button onClick={() => {
+          dispatch(followActions.unfollowUserThunk(id))
+        }}>UnFollow</button>
+
+
+
+
+
+
+
+
       </div>
       <div className='bio'>{user.bio}</div>
     </div>
