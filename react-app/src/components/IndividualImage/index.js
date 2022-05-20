@@ -42,6 +42,8 @@ const IndividualImage = () => {
     return user.id === like.userId
   })
 
+  console.log('LLIKE', like)
+
 
   // useEffect(() => {
 

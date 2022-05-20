@@ -74,6 +74,8 @@ input[type="file"] {
 }
 
 .image-upload-div label {
+  height: 100%;
+  width: 100%;
   cursor: pointer;
 }
 

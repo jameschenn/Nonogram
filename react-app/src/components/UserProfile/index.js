@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
+import * as followActions from '../../store/follows';
+import { loadFollowersThunk } from '../../store/followers'
 // import EditImageForm from "../EditImage/index";
 import './UserProfile.css'
 
@@ -17,6 +19,17 @@ const UserProfile = () => {
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
 
+  const following = useSelector(state => state.follows)
+  const followingArr = Object.values(following)
+  const followers = useSelector(state => state.followers)
+  const followersArr = Object.values(followers)
+
+  // console.log('session user', sessionUser)
+  // console.log('image data', imageData[0])
+
+  // can't follow yourself
+  // sessionUser?.username === imageData[id].user.username
+
   useEffect(() => {
     if (!id) {
       return;
@@ -28,11 +41,16 @@ const UserProfile = () => {
     })();
   }, [id]);
 
-  console.log(user, 'user')
-  console.log(images, 'imageData--------------------')
+
+  // let followed = sessionUser.following.find(me => {
+  //   return me?.username === user.username
+  // })
+
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
+    await dispatch(followActions.loadFollowingThunk(id))
+    await dispatch(loadFollowersThunk(id))
   }, [dispatch, id])
 
 
@@ -46,8 +64,25 @@ const UserProfile = () => {
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
-        <h4>{user?.followers?.length} Followers</h4>
-        <h4>{user?.following?.length} Followers</h4>
+        <h4>{followersArr.length} Followers</h4>
+        <h4>{followingArr.length} Following</h4>
+
+
+
+        {/* TODO: HARDEST TERINARY OF MY LIFE */}
+
+            {/* <button onClick={() => {
+              dispatch(followActions.unfollowUserThunk(id))
+            }}>Unfollow</button>
+
+
+
+            <button onClick={() => {
+               dispatch(followActions.followUserThunk(id))
+            }}>Follow</button> */}
+
+
+
       </div>
       <div className='bio'>{user.bio}</div>
     </div>
