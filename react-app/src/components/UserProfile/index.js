@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
 import * as followActions from '../../store/follows';
+import { loadFollowersThunk } from '../../store/followers'
 // import EditImageForm from "../EditImage/index";
 import './UserProfile.css'
 
@@ -13,11 +14,16 @@ const UserProfile = () => {
   const [user, setUser] = useState({});
   const { id } = useParams(); //user Id
 
-  console.log('IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', id)
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
+
+  const following = useSelector(state => state.follows)
+  const followingArr = Object.values(following)
+  const followers = useSelector(state => state.followers)
+  const followersArr = Object.values(followers)
+
 
 
 
@@ -32,11 +38,12 @@ const UserProfile = () => {
     })();
   }, [id]);
 
-  console.log(user, 'user')
-  console.log(images, 'imageData--------------------')
+
 
   useEffect(async() => {
     await dispatch(imageActions.loadUserImagesThunk(id))
+    await dispatch(followActions.loadFollowingThunk(id))
+    await dispatch(loadFollowersThunk(id))
   }, [dispatch, id])
 
 
@@ -50,8 +57,8 @@ const UserProfile = () => {
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
-        <h4>{user?.followers?.length} Followers</h4>
-        <h4>{user?.following?.length} Followers</h4>
+        <h4>{followersArr.length} Followers</h4>
+        <h4>{followingArr.length} Followers</h4>
 
         <button onClick={() => {
           dispatch(followActions.followUserThunk(id))

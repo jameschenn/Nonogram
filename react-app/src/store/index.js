@@ -5,6 +5,7 @@ import imagesReducer from './images';
 import commentsReducer from './comments';
 import likesReducer from './likes';
 import followsReducer from './follows';
+import followersReducer from './followers';
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   comments: commentsReducer,
   likes: likesReducer,
   follows: followsReducer,
+  followers: followersReducer,
 });
 
 

@@ -1,4 +1,6 @@
-const LOAD = 'follows/LOAD';
+// const LOAD = 'follows/LOAD';
+// const LOAD_FOLLOWERS = 'follows/LOAD_FOLLOWERS';
+const LOAD_FOLLOWING = 'follows/LOAD_FOLLOWING';
 const FOLLOW = 'follows/FOLLOW';
 const UNFOLLOW = 'follows/UNFOLLOW';
 
@@ -6,6 +8,12 @@ const UNFOLLOW = 'follows/UNFOLLOW';
 //   type: LOAD,
 //   user
 // });
+
+
+const loadFollowing = user => ({
+  type: LOAD_FOLLOWING,
+  user
+});
 
 const follow = user => ({
   type: FOLLOW,
@@ -17,17 +25,41 @@ const unfollow = id => ({
   id
 });
 
-// export const loadFollowsThunk = () => async dispatch => {
-//   const response = await fetch(`/api/follows/`, {
+// export const loadFollowsThunk = id => async dispatch => {
+//   const response = await fetch(`/api/follows/${id}`, {
 //     headers: {
 //       'Content-Type': 'application/json'
 //     }
 //   });
-//   if(response.ok) {
+//   if (response.ok) {
 //     const data = await response.json()
 //     dispatch(load(data))
 //   }
 // }
+
+// export const loadFollowersThunk = id => async dispatch => {
+//   const response = await fetch(`/api/follows/${id}`, {
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   });
+//   if (response.ok) {
+//     const data = await response.json()
+//     dispatch(loadFollowers(data))
+//   }
+// }
+
+export const loadFollowingThunk = id => async dispatch => {
+  const response = await fetch(`/api/follows/${id}`, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(loadFollowing(data))
+  }
+}
 
 export const followUserThunk = userId => async dispatch => {
   const response = await fetch(`/api/follows/`, {
@@ -65,18 +97,36 @@ const initialState = {}
 const followsReducer = (state = initialState, action) => {
   switch(action.type) {
     // case LOAD:
-    //   const newState = {
-    //     ...state
-    //   }
-    //   newState['following'] = {}
-    //   action.user.following.forEach(user => {
-    //     newState.following[user.id] = user
-    //   })
-    //   newState['followers'] = {}
-    //   action.user.followers.forEach(user => {
-    //     newState.followers[user.id] = user
+    //   const newState = {}
+    //   console.log('REDUCER', action.user)
+    //   action.user.followers.forEach(follow => {
+    //     newState[follow.id] = follow
     //   });
-      // return newState;
+    //   action.user.following.forEach(follow => {
+    //     newState[follow.id] = follow
+    //   })
+    //   return {
+    //     ...state,
+    //     ...newState
+    //   }
+    // case LOAD_FOLLOWERS:
+    //   const followers = {}
+    //   action.user.followers.forEach(follow => {
+    //     followers[follow.id] = follow
+    //   });
+    //   return {
+    //     ...state,
+    //     ...followers
+    //   };
+    case LOAD_FOLLOWING:
+      const following = {}
+      action.user.following.forEach(follow => {
+        following[follow.id] = follow
+      });
+      return {
+        ...state,
+        ...following
+      }
     case FOLLOW:
       const followUser = {}
       followUser[action.user.following.id] = action.user.following
@@ -88,7 +138,6 @@ const followsReducer = (state = initialState, action) => {
         const unfollowUser = {
           ...state
         };
-      console.log('REDUCER', action)
       delete unfollowUser[action.id];
       return unfollowUser
       default:
