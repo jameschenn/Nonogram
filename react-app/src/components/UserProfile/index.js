@@ -64,8 +64,8 @@ const UserProfile = () => {
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
-        <h4>{followersArr.length} Followers</h4>
-        <h4>{followingArr.length} Following</h4>
+        {/* <h4>{followersArr.length} Followers</h4>
+        <h4>{followingArr.length} Following</h4> */}
 
 
 
