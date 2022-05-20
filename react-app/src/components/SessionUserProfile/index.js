@@ -9,13 +9,11 @@ const SessionUserProfile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams(); //user Id
-  console.log(id)
 
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
   const imageData = Object.values(images)
 
-  console.log('sessionuser', sessionUser)
   useEffect(async () => {
     await dispatch(imageActions.loadSessionUserImagesThunk(sessionUser.id))
   }, [dispatch, id])

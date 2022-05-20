@@ -24,8 +24,11 @@ const UserProfile = () => {
   const followers = useSelector(state => state.followers)
   const followersArr = Object.values(followers)
 
+  // console.log('session user', sessionUser)
+  // console.log('image data', imageData[0])
 
-
+  // can't follow yourself
+  // sessionUser?.username === imageData[id].user.username
 
   useEffect(() => {
     if (!id) {
@@ -38,6 +41,10 @@ const UserProfile = () => {
     })();
   }, [id]);
 
+
+  // let followed = sessionUser.following.find(me => {
+  //   return me?.username === user.username
+  // })
 
 
   useEffect(async() => {
@@ -58,20 +65,21 @@ const UserProfile = () => {
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
         <h4>{followersArr.length} Followers</h4>
-        <h4>{followingArr.length} Followers</h4>
-
-        <button onClick={() => {
-          dispatch(followActions.followUserThunk(id))
-        }}>Follow</button>
-
-        <button onClick={() => {
-          dispatch(followActions.unfollowUserThunk(id))
-        }}>UnFollow</button>
+        <h4>{followingArr.length} Following</h4>
 
 
 
+        {/* TODO: HARDEST TERINARY OF MY LIFE */}
+
+            {/* <button onClick={() => {
+              dispatch(followActions.unfollowUserThunk(id))
+            }}>Unfollow</button>
 
 
+
+            <button onClick={() => {
+               dispatch(followActions.followUserThunk(id))
+            }}>Follow</button> */}
 
 
 
