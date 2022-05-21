@@ -19,10 +19,10 @@ function UploadImage() {
 
   useEffect(() => {
     const errors = [];
-    const fileType = ['']
     if(!image) errors.push('Please choose an image first before uploading')
+    if(caption.length > 500) errors.push('Please provide a caption that is less than 500 characters')
     setErrors(errors)
-  }, [image])
+  }, [image, caption])
 
   const handleSubmit = async e => {
     e.preventDefault()

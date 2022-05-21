@@ -35,6 +35,12 @@
   margin-right: 3rem;
   background-color: lightgray;
   border: solid 1px lightblue;
+
+}
+
+.all-images-comments {
+  word-break: break-all;
+  width: 650px;
 }
 
 .img-feed-card img {

@@ -40,6 +40,16 @@
   list-style-type: none;
 }
 
+.individual-post-caption p {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 500px;
+  /* So very long strings without spaces don't break the styling */
+  word-break: break-all;
+}
+
 
 .individual-comments {
   margin-top: 10px;

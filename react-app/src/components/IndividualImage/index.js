@@ -109,7 +109,9 @@ const IndividualImage = () => {
                 </>
               )}
             </p>
-          <p style={{marginTop: '10px'}}>{imageData?.caption}</p>
+          <div className='individual-post-caption'>
+            <p style={{marginTop: '10px'}}>{imageData?.caption}</p>
+          </div>
           <div className='individual-comments'>
             {commentsData.map((comment, idx) => (
               <ul>

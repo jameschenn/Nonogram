@@ -18,9 +18,21 @@ const EditImageForm =({imageId}) => {
   }, [dispatch])
 
   const [caption, setCaption] = useState(imageData[0]?.caption || "");
+  const [errors, setErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    const errors = [];
+    if (caption.length > 500) errors.push('Please provide a caption that is less than 500 characters')
+    setErrors(errors)
+  }, [caption])
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    setHasSubmitted(true);
+
+    if(errors.length > 0) return;
 
     const payload = {
       caption,
@@ -31,6 +43,11 @@ const EditImageForm =({imageId}) => {
   return (
     <section>
       <form onSubmit={handleSubmit}>
+        <div className="error-div">
+          {hasSubmitted && errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </div>
         <div>
           <input
             type="text"
