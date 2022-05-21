@@ -17,7 +17,7 @@ const EditImageForm =({imageId}) => {
     await dispatch(imageActions.loadUserImagesThunk(id))
   }, [dispatch])
 
-  const [caption, setCaption] = useState("");
+  const [caption, setCaption] = useState(imageData[0]?.caption || "");
 
   const handleSubmit = async e => {
     e.preventDefault();

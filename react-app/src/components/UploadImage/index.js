@@ -83,7 +83,7 @@ function UploadImage() {
             />
           </div>
           <div className='upload-buttons'>
-          <button type='submit'>Upload Image</button>
+          <button type='submit'>Post image</button>
           <button type="button" onClick={handleCancelClick}>Cancel</button>
           </div>
         </form>

@@ -8,6 +8,7 @@ import * as likeActions from '../../store/likes';
 import PostComment from "../PostComment";
 import EditImageForm from "../EditImage/index";
 import EditCommentForm from '../EditComment/index';
+import ErrorPage from "../ErrorsPage";
 import './IndividualImage.css';
 
 const IndividualImage = () => {
@@ -25,6 +26,9 @@ const IndividualImage = () => {
   const commentsData = Object.values(comments)
 
   const [likeId, setLikeId] = useState(0)
+
+  console.log('images', images)
+  console.log('image data', imageData)
 
 
   useEffect(() => {
@@ -70,6 +74,7 @@ const IndividualImage = () => {
 
   return (
     <>
+    {imageData ? (
       <div className='post-container'>
         <div className='post-image'>
           <img src={imageData?.imageUrl} alt='post' />
@@ -86,6 +91,21 @@ const IndividualImage = () => {
                       dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
                     }}>Delete</button>
                   </Popup>
+
+
+
+                {/* <Popup trigger={"blah blah"} modal>
+                  {close => (
+                    <form onSubmit={handle}>
+                      ... blah blah
+                      <button onClick={close} type="submit">close me</button>
+                    </form>
+                  )}
+                </Popup> */}
+
+
+
+
                 </>
               )}
             </p>
@@ -118,6 +138,10 @@ const IndividualImage = () => {
           </div>
         </div>
       </div>
+    ) :
+    (
+      <ErrorPage />
+    )}
     </>
   )
 }
