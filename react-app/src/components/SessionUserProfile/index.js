@@ -29,13 +29,13 @@ const SessionUserProfile = () => {
         </div>
         <div className='profile-info'>
           <h4>{imageData.length} Posts</h4>
-          <h4>{sessionUser?.followers?.length} Followers</h4>
-          <h4>{sessionUser?.following?.length} Followers</h4>
+          {/* <h4>{sessionUser?.followers?.length} Followers</h4> */}
+          {/* <h4>{sessionUser?.following?.length} Followers</h4> */}
         </div>
         <div className='bio'>{sessionUser.bio}</div>
       </div>
       <div className='profile-img-container'>
-        {imageData.map((image, idx) => (
+        {imageData.reverse().map((image, idx) => (
           <ul>
             <div className='profile-img-cards'>
               <a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id} /></a>

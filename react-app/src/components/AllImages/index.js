@@ -30,7 +30,7 @@ const AllImages = () => {
 
   return (
     <>
-    {imageData.map((image, idx) => (
+    {imageData.reverse().map((image, idx) => (
       <div className='img-feed-card'>
         <ul>
           <li><a href={`/users/${image.userId}`}><img src={image?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{ marginLeft: '25px' }} /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{image?.user?.username}</span></a></li>
