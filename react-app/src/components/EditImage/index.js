@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from "../../store/images";
 
-const EditImageForm =({imageId}) => {
+const EditImageForm =({imageId, close}) => {
 
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -38,6 +38,7 @@ const EditImageForm =({imageId}) => {
       caption,
     }
     dispatch(imageActions.editImageThunk(imageId, payload));
+    close();
   }
 
   return (

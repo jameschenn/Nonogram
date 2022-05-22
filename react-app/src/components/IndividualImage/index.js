@@ -84,12 +84,16 @@ const IndividualImage = () => {
               {user?.id === imageData?.userId && (
                 <>
                   <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+                    {close => (
+                    <>
                     <p>Edit Your Caption</p>
-                    <EditImageForm imageId={imageData?.id} />
+                    <EditImageForm imageId={imageData?.id} close={close} />
                     <p>Delete Your Image</p>
                     <button type='button' onClick={() => {
                       dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
                     }}>Delete</button>
+                    </>
+                    )}
                   </Popup>
                 </>
               )}
@@ -103,10 +107,15 @@ const IndividualImage = () => {
                 <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span></a> {comment.comment} {user?.id === comment?.userId && (
                   <>
                     <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
+                      {close => (
+                      <>
                       <p>Edit Your Comment</p>
-                      <EditCommentForm commentId={comment} />
+
+                      <EditCommentForm commentId={comment} close={close} />
                       <button type='button' onClick={() => { dispatch(commentActions.deleteCommentThunk(comment.id)) }}> Delete Comment</button>
-                    </Popup>
+                      </>
+                      )}
+                      </Popup>
                   </>
                 )}</li>
               </ul>
