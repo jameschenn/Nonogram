@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from "../../store/images";
 import * as commentActions from "../../store/comments";
 
-const EditCommentForm = ({commentId}) => {
+const EditCommentForm = ({commentId, close}) => {
 
   const { id } = useParams(); // image id
   const dispatch = useDispatch();
@@ -39,6 +39,7 @@ const EditCommentForm = ({commentId}) => {
       comment,
     }
     dispatch(commentActions.editCommentThunk(commentId.id, payload))
+    close();
   }
 
   return (
