@@ -91,21 +91,6 @@ const IndividualImage = () => {
                       dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
                     }}>Delete</button>
                   </Popup>
-
-
-
-                {/* <Popup trigger={"blah blah"} modal>
-                  {close => (
-                    <form onSubmit={handle}>
-                      ... blah blah
-                      <button onClick={close} type="submit">close me</button>
-                    </form>
-                  )}
-                </Popup> */}
-
-
-
-
                 </>
               )}
             </p>
@@ -118,7 +103,7 @@ const IndividualImage = () => {
                 <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span></a> {comment.comment} {user?.id === comment?.userId && (
                   <>
                     <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
-                      <p>Edit Your Caption</p>
+                      <p>Edit Your Comment</p>
                       <EditCommentForm commentId={comment} />
                       <button type='button' onClick={() => { dispatch(commentActions.deleteCommentThunk(comment.id)) }}> Delete Comment</button>
                     </Popup>

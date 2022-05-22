@@ -18,10 +18,22 @@ const EditCommentForm = ({commentId}) => {
     await dispatch(imageActions.loadUserImagesThunk(id))
   }, [dispatch])
 
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState(commentId?.comment || "");
+  const [errors, setErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  useEffect(() => {
+    const errors = [];
+    if(comment.length > 500 || comment.length < 1) errors.push('Please provide a comment that is between 1 - 500 characters')
+    setErrors(errors)
+  }, [comment])
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    setHasSubmitted(true);
+
+    if(errors.length > 0) return;
 
     const payload = {
       comment,
@@ -32,6 +44,11 @@ const EditCommentForm = ({commentId}) => {
   return (
     <section>
       <form onSubmit={handleSubmit}>
+        <div className="error-div">
+          {hasSubmitted && errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </div>
         <div>
           <input
             type="text"
@@ -39,7 +56,7 @@ const EditCommentForm = ({commentId}) => {
             onChange={(e => setComment(e.target.value))}
             />
         </div>
-        <button type="Submit" disabled={comment < 1}>Edit Comment</button>
+        <button type="Submit">Edit Comment</button>
       </form>
     </section>
   )

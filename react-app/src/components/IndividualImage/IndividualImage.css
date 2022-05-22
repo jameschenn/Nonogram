@@ -60,6 +60,8 @@
   height: 325px;
   overflow-y: scroll;
   scrollbar-width: thin;
+
+  word-break: break-all;
 }
 
 .individual-comments li {
