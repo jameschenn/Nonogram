@@ -48,6 +48,7 @@ const UserProfile = () => {
 
 
   useEffect(async() => {
+    await dispatch(imageActions.clearStoreThunk())
     await dispatch(imageActions.loadUserImagesThunk(id))
     await dispatch(followActions.loadFollowingThunk(id))
     await dispatch(loadFollowersThunk(id))

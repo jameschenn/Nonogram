@@ -27,9 +27,6 @@ const IndividualImage = () => {
 
   const [likeId, setLikeId] = useState(0)
 
-  console.log('images', images)
-  console.log('image data', imageData)
-
 
   useEffect(() => {
     dispatch(imageActions.loadOneImageThunk(id))

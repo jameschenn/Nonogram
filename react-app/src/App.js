@@ -17,6 +17,7 @@ import UploadImage from './components/UploadImage';
 import PostComment from './components/PostComment'
 import EditProfileForm from './components/EditProfile';
 import ErrorPage from './components/ErrorsPage';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -71,6 +72,7 @@ function App() {
           <ErrorPage />
         </Route>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 }

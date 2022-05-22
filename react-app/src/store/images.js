@@ -6,6 +6,16 @@ const ADD_IMAGE = 'images/ADD_IMAGE';
 const EDIT_IMAGE = 'images/EDIT_IMAGE';
 const DELETE_IMAGE = 'images/DELETE_IMAGE';
 
+const CLEAR_STORE = 'images/CLEAR_STORE';
+
+const clearStore = () => ({
+  type: CLEAR_STORE
+})
+
+export const clearStoreThunk = () => async dispatch => {
+  dispatch(clearStore())
+}
+
 const load = images => ({
   type: LOAD,
   images
@@ -153,9 +163,9 @@ const imagesReducer = (state = initalState, action) => {
         ...state,
         ...allImages
       };
-    case LOAD_USER_IMAGES:
-      const newState = {}
-      action.image.images.forEach(image => {
+      case LOAD_USER_IMAGES:
+        const newState = {}
+        action.image.images.forEach(image => {
         newState[image.id] = image;
       });
       return {
@@ -180,6 +190,10 @@ const imagesReducer = (state = initalState, action) => {
       };
       delete deletedState[action.image];
       return deletedState
+
+    case CLEAR_STORE:
+      return {}
+
       default:
         return state
   }
