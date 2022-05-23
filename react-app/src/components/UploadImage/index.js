@@ -10,12 +10,14 @@ function UploadImage() {
   const history = useHistory()
   const { id } = useParams()
 
-  const sessionUser = useSelector(state => state.session.user)
-  const images = useSelector(state => state.images)
+  const sessionUser = useSelector(state => state.session.user);
+  const images = useSelector(state => state.images);
   const [errors, setErrors] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [image, setImage] = useState(null)
-  const [caption, setCaption] = useState('')
+  const [image, setImage] = useState(null);
+  const [caption, setCaption] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [invalidImg, setInvalidImg] = useState(false);
 
   useEffect(() => {
     const errors = [];
@@ -43,6 +45,7 @@ function UploadImage() {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
+    setDisabled(false)
     setImage(file);
   }
 
@@ -51,10 +54,15 @@ function UploadImage() {
     history.push(`/`);
   };
 
+
   return (
     <section>
       <div className='preview-div'>
-        {image ? <img src={URL.createObjectURL(image)} alt='upload-preview' className='upload-preview' /> : <h1 id='upload-file'>Upload a file...</h1>}
+        {image ? <img src={URL.createObjectURL(image)} alt='upload-preview' className='upload-preview' onError={({ currentTarget }) => {
+          currentTarget.onerror = null;
+          currentTarget.src ="https://res.cloudinary.com/jameschenn/image/upload/v1653283037/Nonogram/1040967-1538804962594-19eb4a35bc75_ggetnh.jpg"
+          setDisabled(true)
+        }} /> : <h1 id='upload-file'>Upload a file...</h1>}
       </div>
       <div className="upload-form">
         <form onSubmit={handleSubmit}>
@@ -83,7 +91,8 @@ function UploadImage() {
             />
           </div>
           <div className='upload-buttons'>
-          <button type='submit'>Post image</button>
+            {console.log('DISABLED', disabled)}
+          <button type='submit' disabled={disabled}>Post image</button>
           <button type="button" onClick={handleCancelClick}>Cancel</button>
           </div>
         </form>

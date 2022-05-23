@@ -47,7 +47,7 @@
   flex-wrap: wrap;
   width: 500px;
   /* So very long strings without spaces don't break the styling */
-  word-break: break-all;
+  word-break: break-word;
 }
 
 
@@ -61,7 +61,7 @@
   overflow-y: scroll;
   scrollbar-width: thin;
 
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .individual-comments li {
