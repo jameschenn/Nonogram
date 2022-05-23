@@ -2,6 +2,10 @@
 
 Nonogram is an Instagram clone named after my dog Nono. Nonogram is a social-media platform where users can communicate amongst each other by sharing images, and commenting on them. 
 
+# Live Site
+
+[Nonogram](https://nonogram-project.herokuapp.com/)
+
 ## Application Architecture
 
 Nonogram is built on a React frontend with a Flask backend, using PostgreSQL as a database.
