@@ -24,14 +24,7 @@ const UserProfile = () => {
   const followers = useSelector(state => state.followers)
   const followersArr = Object.values(followers)
 
-  // console.log('session user', sessionUser)
-  // console.log('image data', imageData[0])
 
-  // console.log('following', followingArr)
-  console.log('followers', followersArr)
-
-  // can't follow yourself
-  // sessionUser?.username === imageData[id].user.username
 
   useEffect(() => {
     if (!id) {
@@ -44,12 +37,22 @@ const UserProfile = () => {
     })();
   }, [id]);
 
+  // can't follow yourself
+  const myself = sessionUser?.username === imageData[id]?.user?.username
   let followed = followersArr.find(me => {
     return me.id === user.id
   })
 
-  console.log('followed', followed)
-
+  // const handleFollow = e => {
+  //   e.preventDefault()
+  //   if(followed) {
+  //     dispatch(unfollowUserThunk(id))
+  //   } else if (myself) {
+  //     return null;
+  //   } else {
+  //     dispatch(followUserThunk(id))
+  //   }
+  // }
 
   useEffect(async() => {
     await dispatch(imageActions.clearStoreThunk())
@@ -76,15 +79,27 @@ const UserProfile = () => {
 
         {/* TODO: HARDEST TERINARY OF MY LIFE */}
 
-        {followed ? (
-          <button onClick={() => {
-            dispatch(unfollowUserThunk(id))
-          }}>Unfollow</button>
+        {myself ? (
+          <div></div>
         ): (
-          <button onClick={() => {
-             dispatch(followUserThunk(id))
-          }}>Follow</button>
+
+          followed ? (
+            <button onClick={() => {
+              dispatch(unfollowUserThunk(id))
+            }}>Unfollow</button>
+          ): (
+            <button onClick={() => {
+              dispatch(followUserThunk(id))
+            }}>Follow</button>
+            )
         )}
+
+        {/* {followed ? (
+          <button onClick={handleFollow}>Unfollow</button>
+        ) : (
+          <button onClick={handleFollow}>Follow</button>
+        )} */}
+
 
 
 
