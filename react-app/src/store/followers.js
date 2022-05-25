@@ -1,10 +1,23 @@
-//Seperate store because it was getting overwritten in the followsReducer
+//Store to get other users who are following the session user
 
 const LOAD_FOLLOWERS = 'follows/LOAD_FOLLOWERS';
+
+const FOLLOW = 'follows/FOLLOW';
+const UNFOLLOW = 'follows/UNFOLLOW';
 
 const loadFollowers = user => ({
   type: LOAD_FOLLOWERS,
   user
+});
+
+const follow = user => ({
+  type: FOLLOW,
+  user
+});
+
+const unfollow = id => ({
+  type: UNFOLLOW,
+  id
 });
 
 export const loadFollowersThunk = id => async dispatch => {
@@ -16,6 +29,37 @@ export const loadFollowersThunk = id => async dispatch => {
   if (response.ok) {
     const data = await response.json()
     dispatch(loadFollowers(data))
+  }
+}
+
+export const followUserThunk = userId => async dispatch => {
+  const response = await fetch(`/api/follows/`, {
+    method: 'POST',
+    headers: {
+      'CONTENT-TYPE': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: userId,
+    })
+  });
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(follow(data))
+  }
+}
+
+export const unfollowUserThunk = id => async dispatch => {
+  const response = await fetch(`/api/follows/`, {
+    method: "DELETE",
+    headers: {
+      'CONTENT-TYPE': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: id
+    })
+  });
+  if (response.ok) {
+    dispatch(unfollow(id))
   }
 }
 
@@ -32,7 +76,19 @@ const followersReducer = (state = initialState, action) => {
         ...state,
         ...followers
       };
-
+    case FOLLOW:
+      const followUser = {}
+      followUser[action.user.following.id] = action.user.following
+      return {
+        ...state,
+        ...followUser
+      };
+    case UNFOLLOW:
+      const unfollowUser = {
+        ...state
+      };
+      delete unfollowUser[action.id];
+      return unfollowUser
     default:
       return state
   }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images';
 import * as followActions from '../../store/follows';
-import { loadFollowersThunk } from '../../store/followers'
+import { loadFollowersThunk, followUserThunk, unfollowUserThunk } from '../../store/followers'
 // import EditImageForm from "../EditImage/index";
 import './UserProfile.css'
 
@@ -65,22 +65,22 @@ const UserProfile = () => {
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
-        {/* <h4>{followersArr.length} Followers</h4>
-        <h4>{followingArr.length} Following</h4> */}
+        <h4>{followersArr.length} Followers</h4>
+        <h4>{followingArr.length} Following</h4>
 
 
 
         {/* TODO: HARDEST TERINARY OF MY LIFE */}
 
-            {/* <button onClick={() => {
-              dispatch(followActions.unfollowUserThunk(id))
+            <button onClick={() => {
+              dispatch(unfollowUserThunk(id))
             }}>Unfollow</button>
 
 
 
             <button onClick={() => {
-               dispatch(followActions.followUserThunk(id))
-            }}>Follow</button> */}
+               dispatch(followUserThunk(id))
+            }}>Follow</button>
 
 
 

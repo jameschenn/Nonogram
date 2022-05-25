@@ -19,11 +19,17 @@ def get_follows(id):
 @login_required
 def follow():
 
+
+
   follow_id = request.json['userId']
+
   follow = User.query.get(follow_id)
 
-  current_user.following.append(follow)
-  db.session.commit()
+  if follow not in current_user.following:
+    current_user.following.append(follow)
+    db.session.commit()
+
+
   return {'following': follow.to_dict()}
 
 
