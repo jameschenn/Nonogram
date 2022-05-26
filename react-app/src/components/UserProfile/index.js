@@ -67,45 +67,29 @@ const UserProfile = () => {
     <div className='profile-header'>
     <img src={user?.profilePictureUrl} alt={user?.username} className='user-profile-icon'/>
       <div className="username">
-        <h1>{user?.username}</h1>
+        <h1>{user?.username} </h1>
+        <div className="follow-button">
+            {myself ? (
+              <div></div>
+            ) : (
+
+              followed ? (
+                <button onClick={() => {
+                  dispatch(unfollowUserThunk(id))
+                  }} style={{ color: 'black', backgroundColor: 'lightgray' }}>Unfollow</button>
+              ) : (
+                <button onClick={() => {
+                  dispatch(followUserThunk(id))
+                    }} style={{ color: 'white', backgroundColor:'cadetblue'}}>Follow</button>
+              )
+            )}
+        </div>
         <p>{user?.firstName} {user?.lastName}</p>
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
         <h4>{followersArr.length} Followers</h4>
         <h4>{followingArr.length} Following</h4>
-
-
-
-        {/* TODO: HARDEST TERINARY OF MY LIFE */}
-
-        {myself ? (
-          <div></div>
-        ): (
-
-          followed ? (
-            <button onClick={() => {
-              dispatch(unfollowUserThunk(id))
-            }}>Unfollow</button>
-          ): (
-            <button onClick={() => {
-              dispatch(followUserThunk(id))
-            }}>Follow</button>
-            )
-        )}
-
-        {/* {followed ? (
-          <button onClick={handleFollow}>Unfollow</button>
-        ) : (
-          <button onClick={handleFollow}>Follow</button>
-        )} */}
-
-
-
-
-
-
-
 
       </div>
       <div className='bio'>{user.bio}</div>
