@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import Popup from 'reactjs-popup';
+import ClipLoader from "react-spinners/ClipLoader";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
 import * as likeActions from '../../store/likes';
@@ -25,7 +26,14 @@ const IndividualImage = () => {
   const comments = useSelector(state => state?.comments)
   const commentsData = Object.values(comments)
 
-  const [likeId, setLikeId] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
 
 
   useEffect(() => {
@@ -71,10 +79,18 @@ const IndividualImage = () => {
 
   return (
     <>
-    {imageData ? (
-      <div className='post-container'>
+    {loading ? (
+
+        <div className="loading">
+          <ClipLoader color={'#50E3C2'} loading={loading} size={150} />
+        </div>
+
+    ) : (
+
+      imageData ? (
+        <div className='post-container'>
         <div className='post-image'>
-          <img src={imageData?.imageUrl} alt='post' />
+        <img src={imageData?.imageUrl} alt='post' />
         </div>
         <div className='post-info'>
           <p><a href={`/users/${imageData?.userId}`}><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span></a>
@@ -94,18 +110,18 @@ const IndividualImage = () => {
                   </Popup>
                 </>
               )}
-            </p>
-          <div className='individual-post-caption'>
-            <p style={{marginTop: '10px'}}>{imageData?.caption}</p>
-          </div>
-          <div className='individual-comments'>
+              </p>
+              <div className='individual-post-caption'>
+              <p style={{marginTop: '10px'}}>{imageData?.caption}</p>
+              </div>
+              <div className='individual-comments'>
             {commentsData.map((comment, idx) => (
               <ul>
                 <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span></a> {comment.comment} {user?.id === comment?.userId && (
                   <>
                     <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                       {close => (
-                      <>
+                        <>
                       <p>Edit Your Comment</p>
 
                       <EditCommentForm commentId={comment} close={close} />
@@ -126,15 +142,16 @@ const IndividualImage = () => {
                 )}
               <p>{likes?.length} likes</p>
           <div className="individual-post-comment">
-            <PostComment />
+          <PostComment />
           </div>
           </div>
-        </div>
-      </div>
-    ) :
-    (
-      <ErrorPage />
-    )}
+          </div>
+          </div>
+          ) :
+          (
+            <ErrorPage />
+            )
+        )}
     </>
   )
 }

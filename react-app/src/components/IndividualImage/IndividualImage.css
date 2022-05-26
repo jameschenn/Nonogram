@@ -1,3 +1,10 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 15rem;
+  margin-bottom: 16.9rem;
+}
+
 .profile-icon {
   height: 50px;
   width: 50px;
