@@ -10,6 +10,7 @@ import PostComment from "../PostComment";
 import EditImageForm from "../EditImage/index";
 import EditCommentForm from '../EditComment/index';
 import ErrorPage from "../ErrorsPage";
+import LikesList from "../LikesList";
 import './IndividualImage.css';
 
 const IndividualImage = () => {
@@ -32,7 +33,7 @@ const IndividualImage = () => {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 1000)
+    }, 600)
   }, [])
 
 
@@ -51,22 +52,7 @@ const IndividualImage = () => {
     return user.id === like.userId
   })
 
-  // console.log('LIKE', like)
-
-
-  // useEffect(() => {
-
-    // let like = imageData?.likes?.find((like) => {
-    //   return user.id === like.userId
-    // })
-
-  //   console.log('HIT-------', like)
-
-  //   setLikeId(like?.id)
-  //   console.log('STATE HAS CHANGED. SECOND IF')
-  //   console.log('STATE HAS CHANGED like', like)
-  //   console.log('STATE HAS CHANGED likeId', likeId)
-  // }, [dispatch])
+  console.log('likes', likes)
 
   const handleLike =  e => {
     e.preventDefault()
@@ -140,7 +126,14 @@ const IndividualImage = () => {
               ) : (
                 <button onClick={handleLike}>🤍</button>
                 )}
-              <p>{likes?.length} likes</p>
+                  <Popup trigger={<p>{likes?.length} likes</p>} position="left bottom">
+                    {close => (
+                      <>
+                        <p style={{ marginTop: '10px', padding: '5px', fontWeight: 'bold', borderBottom: 'solid 1px lightgray' }}>Likes</p>
+                        <LikesList />
+                      </>
+                    )}
+                  </Popup>
           <div className="individual-post-comment">
           <PostComment />
           </div>
