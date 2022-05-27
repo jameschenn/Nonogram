@@ -18,6 +18,7 @@ import PostComment from './components/PostComment'
 import EditProfileForm from './components/EditProfile';
 import ErrorPage from './components/ErrorsPage';
 import Footer from './components/Footer';
+import LikesList from './components/LikesList'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -67,6 +68,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <AllImages />
+        </ProtectedRoute>
+        <ProtectedRoute path='/likes/:id' exact={true} >
+          <LikesList />
         </ProtectedRoute>
         <Route path="*">
           <ErrorPage />

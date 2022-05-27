@@ -39,6 +39,10 @@ body {
   border-bottom: 1px solid lightgray;
 }
 
+.profile-header h1, p {
+  margin-left: 4rem;
+}
+
 .profile-info {
   display: flex;
   flex-direction: row;
@@ -65,4 +69,16 @@ body {
 
 .bio {
   margin-bottom: 25px;
+}
+
+.follow-button {
+  margin: 10px;
+}
+
+.follow-button button {
+  width: 200px;
+  height: 30px;
+  border: none;
+  color: white;
+  background-color: cadetblue;
 }
