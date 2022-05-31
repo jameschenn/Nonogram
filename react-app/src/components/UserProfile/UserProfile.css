@@ -11,7 +11,7 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   flex-grow: 1;
-  padding-left: 15px;
+  padding-left: 120px;
 }
 
 .profile-img-cards {
@@ -81,4 +81,12 @@ body {
   border: none;
   color: white;
   background-color: cadetblue;
+}
+
+.follows-list li, a, img {
+  list-style-type: none;
+  text-decoration: none;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
 }

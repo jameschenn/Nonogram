@@ -84,10 +84,10 @@ const UserProfile = () => {
           <Popup trigger={<p>{followersArr.length} Followers</p>} position='bottom center'>
             {close => (
               <>
-                <p style={{ fontWeight: 'bold', borderBottom: 'solid 1px lightgray', marginRight: '50px' }}>Likes</p>
+                <p style={{ fontWeight: 'bold', borderBottom: 'solid 1px lightgray', marginRight: '20px' }}>Likes</p>
                 {followersArr.map(follower => (
-                  <ul>
-                    <li>{follower.username}</li>
+                  <ul className='follows-list'>
+                    <a href={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></a>
                   </ul>
                 ))}
               </>
