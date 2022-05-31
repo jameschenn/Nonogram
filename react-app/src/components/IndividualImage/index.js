@@ -52,7 +52,6 @@ const IndividualImage = () => {
     return user.id === like.userId
   })
 
-  console.log('likes', likes)
 
   const handleLike =  e => {
     e.preventDefault()
@@ -85,9 +84,9 @@ const IndividualImage = () => {
                     <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                       {close => (
                         <>
-                          <p>Edit Your Caption</p>
+                          <p style={{ marginRight: '100px' }}>Edit Your Caption</p>
                           <EditImageForm imageId={imageData?.id} close={close} />
-                          <p>Delete Your Image</p>
+                          <p style={{ marginRight: '100px' }}>Delete Your Image</p>
                           <button type='button' onClick={() => {
                             dispatch(imageActions.deleteImageThunk(imageData?.id)).then(() => history.push(`/me`))
                           }}>Delete</button>
@@ -108,7 +107,7 @@ const IndividualImage = () => {
                         <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                           {close => (
                             <>
-                              <p>Edit Your Comment</p>
+                              <p style={{ marginRight: '60px' }}>Edit Your Comment</p>
 
                               <EditCommentForm commentId={comment} close={close} />
                               <button type='button' onClick={() => { dispatch(commentActions.deleteCommentThunk(comment.id)) }}> Delete Comment</button>

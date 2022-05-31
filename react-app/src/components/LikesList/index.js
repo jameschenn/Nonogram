@@ -18,13 +18,9 @@ const LikesList = () => {
   const likes = useSelector(state => state.likes)
   const likesData = Object.values(likes)
 
-  console.log('ID', imageData[0])
-  console.log('LD', likesData)
-
   const imageLikes = likesData.filter(likes => {
     return likes?.imageId === imageData[0]?.id
   })
-
 
   useEffect(async () => {
     await dispatch(imageActions.loadOneImageThunk(id))
