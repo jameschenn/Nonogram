@@ -18,7 +18,8 @@ import PostComment from './components/PostComment'
 import EditProfileForm from './components/EditProfile';
 import ErrorPage from './components/ErrorsPage';
 import Footer from './components/Footer';
-import LikesList from './components/LikesList'
+import LikesList from './components/LikesList';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);

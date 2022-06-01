@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import Popup from 'reactjs-popup';
 import * as imageActions from '../../store/images';
 import * as followActions from '../../store/follows';
 import { loadFollowersThunk, followUserThunk, unfollowUserThunk } from '../../store/followers'
@@ -24,8 +25,6 @@ const UserProfile = () => {
   const followers = useSelector(state => state.followers)
   const followersArr = Object.values(followers)
 
-
-
   useEffect(() => {
     if (!id) {
       return;
@@ -40,24 +39,13 @@ const UserProfile = () => {
   // can't follow yourself
   const myself = sessionUser?.username === imageData[id]?.user?.username
   let followed = followersArr.find(me => {
-    return me.id === user.id
+    return me.id === sessionUser.id
   })
 
-  // const handleFollow = e => {
-  //   e.preventDefault()
-  //   if(followed) {
-  //     dispatch(unfollowUserThunk(id))
-  //   } else if (myself) {
-  //     return null;
-  //   } else {
-  //     dispatch(followUserThunk(id))
-  //   }
-  // }
 
   useEffect(async() => {
     await dispatch(imageActions.clearStoreThunk())
     await dispatch(imageActions.loadUserImagesThunk(id))
-    await dispatch(followActions.loadFollowingThunk(id))
     await dispatch(loadFollowersThunk(id))
   }, [dispatch, id])
 
@@ -88,7 +76,22 @@ const UserProfile = () => {
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
-        <h4>{followersArr.length} Followers</h4>
+        {/* <h4>{followersArr.length} Followers</h4> */}
+
+          <Popup trigger={<p>{followersArr.length} Followers</p>} position='bottom center'>
+            {close => (
+              <>
+                <p style={{ fontWeight: 'bold', borderBottom: 'solid 1px lightgray', marginRight: '20px' }}>Likes</p>
+                {followersArr.map(follower => (
+                  <ul className='follows-list'>
+                    <a href={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></a>
+                  </ul>
+                ))}
+              </>
+            )}
+          </Popup>
+
+
         <h4>{followingArr.length} Following</h4>
 
       </div>
