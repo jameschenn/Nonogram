@@ -25,10 +25,6 @@ const UserProfile = () => {
   const followers = useSelector(state => state.followers)
   const followersArr = Object.values(followers)
 
-  console.log('followers', followersArr)
-
-
-
   useEffect(() => {
     if (!id) {
       return;
@@ -43,8 +39,9 @@ const UserProfile = () => {
   // can't follow yourself
   const myself = sessionUser?.username === imageData[id]?.user?.username
   let followed = followersArr.find(me => {
-    return me.id === user.id
+    return me.id === sessionUser.id
   })
+
 
   useEffect(async() => {
     await dispatch(imageActions.clearStoreThunk())
@@ -93,12 +90,6 @@ const UserProfile = () => {
               </>
             )}
           </Popup>
-
-
-
-
-
-
 
 
         <h4>{followingArr.length} Following</h4>

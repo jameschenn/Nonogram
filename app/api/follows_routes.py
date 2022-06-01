@@ -30,8 +30,8 @@ def follow():
     db.session.commit()
 
 
-  return {'following': follow.to_dict()}
-
+  # return {'following': follow.to_dict()}
+  return {'following': current_user.to_dict() }
 
 @follow_routes.route('/', methods=['DELETE'])
 def unfollow():
@@ -42,4 +42,4 @@ def unfollow():
   current_user.following.remove(followed)
   db.session.commit()
 
-  return {'unfollowed': followed.to_dict()}
+  return {'unfollowed': current_user.to_dict()}
