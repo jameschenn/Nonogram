@@ -76,8 +76,6 @@ const UserProfile = () => {
       </div>
       <div className='profile-info'>
         <h4>{imageData.length} Posts</h4>
-        {/* <h4>{followersArr.length} Followers</h4> */}
-
           <Popup trigger={<p style={{fontWeight: 'bold'}}>{followersArr.length} Followers</p>} position='bottom center'>
             {close => (
               <>
