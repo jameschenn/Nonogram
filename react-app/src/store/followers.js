@@ -44,7 +44,6 @@ export const followUserThunk = userId => async dispatch => {
   });
   if (response.ok) {
     const data = await response.json();
-    console.log('data', data)
     dispatch(follow(data))
   }
 }
@@ -89,7 +88,6 @@ const followersReducer = (state = initialState, action) => {
       const unfollowUser = {
         ...state
       };
-      console.log('action', action)
       delete unfollowUser[action.id.unfollowed.id];
       return unfollowUser
     default:
