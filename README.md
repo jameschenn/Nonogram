@@ -78,4 +78,4 @@ Users also can click on each individual post from the main feed or user's indivi
 
 ## Future Implementation Ideas
 
-Current WIP includes following each other, and the introduction of web sockets into the app. So users can directly message each other. Please stay tuned! 
+Current WIP: Utilize the private status of Users, and the introduction of web sockets into the app. So users can directly message each other. Please stay tuned! 
