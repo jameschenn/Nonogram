@@ -38,7 +38,7 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
         <div className="all-images-comments">
-          <li> <a href={`/users/${image.userId}`}><span style={{ fontWeight: 'bold', marginLeft: '10px', marginRight: '5px' }}>{image?.user?.username}</span></a> {image?.caption}</li>
+          <li> <a href={`/users/${image.userId}`}><span style={{ fontWeight: 'bold', marginLeft: '10px', marginRight: '15px', marginBottom: '5px' }}>{image?.user?.username}</span></a> {image?.caption}</li>
         </div>
           {/* <li>{image?.likes.length} likes</li> */}
         </ul>
