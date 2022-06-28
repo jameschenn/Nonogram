@@ -76,6 +76,12 @@ Users also can click on each individual post from the main feed or user's indivi
 
 ![readme image](https://user-images.githubusercontent.com/73676915/169725745-eacde624-43c5-45ac-960c-60c83b0d97c7.PNG)
 
+### Follows
+
+Users also can follow and unfollow each other, and see users they follow, or are followed by in seperate modals.
+
+![readme image 2](https://res.cloudinary.com/jameschenn/image/upload/v1656442995/Nonogram/github_pic_xpopfw.png)
+
 ## Future Implementation Ideas
 
 Current WIP: Utilize the private status of Users, and the introduction of web sockets into the app. So users can directly message each other. Please stay tuned! 
