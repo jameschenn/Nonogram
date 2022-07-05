@@ -62,12 +62,13 @@ input[type="file"] {
 
 .image-upload-div {
   text-align: center;
-  padding: 5%;
+  padding: 3.5%;
   margin-top: 15px;
   margin-left: 35px;
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
   color: white;
 }
+
 
 .image-upload-div input{
   display: none;
@@ -77,8 +78,16 @@ input[type="file"] {
   height: 100%;
   width: 100%;
   cursor: pointer;
+  font-size: large;
+  background-color: cadetblue;
+  padding: 3%;
 }
 
+.image-upload-div label:hover {
+  border: 2px solid cadetblue;
+  color: cadetblue;
+  background-color: white;
+}
 
 .preview-div img {
   border-radius: 0px;
