@@ -62,7 +62,7 @@ function UploadImage() {
           currentTarget.onerror = null;
           currentTarget.src ="https://res.cloudinary.com/jameschenn/image/upload/v1653283037/Nonogram/1040967-1538804962594-19eb4a35bc75_ggetnh.jpg"
           setDisabled(true)
-        }} /> : <h1 id='upload-file'>Upload a file...</h1>}
+        }} /> : <h1 id='upload-file'>Image Preview</h1>}
       </div>
       <div className="upload-form">
         <form onSubmit={handleSubmit}>
@@ -73,7 +73,7 @@ function UploadImage() {
           </div>
           <div className='image-upload-div'>
             <label for='image-upload'>
-              Upload Image <br/> (required) <br/> <i class="fa-solid fa-camera"></i>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Upload Image &nbsp; <i class="fa-solid fa-camera"></i> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
             <input
               id='image-upload'
               type='file'
