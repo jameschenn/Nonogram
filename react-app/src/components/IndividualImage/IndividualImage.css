@@ -34,6 +34,11 @@
 }
 
 .post-info p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+
   width: 500px;
   padding: 1px;
 }
