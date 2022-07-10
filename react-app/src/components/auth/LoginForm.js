@@ -40,6 +40,7 @@ const LoginForm = () => {
   }
 
   return (
+    <>
     <div className='loginForm'>
       <div className='login-container'>
         <img src='https://res.cloudinary.com/jameschenn/image/upload/v1652757406/Nonogram/Shih-Tzu-PNG-File_g8j0db.png' alt='nono-logo' className='nono-logo'/>
@@ -72,12 +73,16 @@ const LoginForm = () => {
             <button type='submit'>Login</button>
             <button type="submit" onClick={demo}>Demo Login</button>
           </div>
-          <div className='new-user'>
-            <p>New User? <a href={`/sign-up`}>Sign up!</a></p>
-          </div>
       </form>
       </div>
     </div>
+      <div className='new-container'>
+        <div className='login-new'>
+          <p style={{marginRight: '7px'}}>New User?</p>
+          <a href={`/sign-up`}>Sign up!</a>
+        </div>
+    </div>
+    </>
   );
 };
 
