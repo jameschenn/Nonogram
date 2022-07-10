@@ -103,6 +103,7 @@ const SignUpForm = () => {
   }
 
   return (
+    <>
     <div className='signUpForm'>
       <div className='signUp-container'>
         <form onSubmit={onSignUp}>
@@ -193,12 +194,16 @@ const SignUpForm = () => {
             ></input>
           </div>
           <button type='submit'>Sign Up</button>
-          <div className='new-user'>
-            <p>Forgot you had an account? <a href={`/login`}>Log in!</a></p>
-          </div>
         </form>
     </div>
   </div>
+  <div className='new-container'>
+    <div className='login-new'>
+      <p style={{marginRight:'10px', marginLeft:'-5px'}}>Already had an account?</p>
+          <a href={`/login`}>Log in!</a>
+    </div>
+  </div>
+  </>
   );
 };
 
