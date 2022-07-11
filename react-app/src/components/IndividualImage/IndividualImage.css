@@ -60,10 +60,13 @@
   width: 480px;
   /* So very long strings without spaces don't break the styling */
   word-break: break-word;
+  margin-top: 200px;
 }
 
 
 .individual-comments {
+
+
   margin-top: 10px;
   border-top: solid 1px lightgray;
   padding-top: 15px;

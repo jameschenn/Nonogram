@@ -101,7 +101,7 @@ const IndividualImage = () => {
               <div className='individual-comments'>
                 {commentsData.map((comment, idx) => (
                   <ul>
-                    <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold' }}>{comment.user.username}</span></a> {comment.comment} {user?.id === comment?.userId && (
+                    <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{comment.user.username}</span></a> <span>{comment.comment}</span> {user?.id === comment?.userId && (
                       <>
                         <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                           {close => (
