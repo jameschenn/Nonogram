@@ -29,7 +29,9 @@ nav {
 
 .profile-dropdown {
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 5px;
+  right: 100px;
 }
 
 .profile-dropdown img {
@@ -75,4 +77,20 @@ nav {
 .dropdown-content a:hover {
   color: #FFFFFF;
   background-color: cadetblue;
+}
+
+
+.search-div {
+  position: absolute;
+  top:15px;
+}
+
+.user-links  {
+  display: flex;
+  align-items: center;
+}
+
+.user-links li {
+  margin-top: 22px;
+  margin-right: 25px;
 }

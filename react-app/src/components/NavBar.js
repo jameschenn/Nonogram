@@ -3,6 +3,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LogoutButton from './auth/LogoutButton';
+import SearchBar from '../SearchBar';
 import './NavBar.css'
 
 const NavBar = () => {
@@ -18,6 +19,17 @@ const NavBar = () => {
               <span style={{fontWeight: 'bold'}}>Nonogram</span>
             </NavLink>
           </li>
+
+
+         {sessionUser && (
+
+           <div className='search-div'>
+            <SearchBar />
+          </div>
+          )}
+
+
+
           {/* <li>
             <NavLink to='/login' exact={true} activeClassName='active'>
               Login
@@ -33,6 +45,9 @@ const NavBar = () => {
               Users
             </NavLink>
           </li> */}
+
+
+         <div className='user-links'>
           {sessionUser && (
           <>
           <li>
@@ -41,6 +56,8 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
+
+
           {/* <div>
             <details>
               <summary>Test</summary>
@@ -64,6 +81,7 @@ const NavBar = () => {
           </li>
           </>
           )}
+          </div>
         </ul>
       </div>
     </nav>
