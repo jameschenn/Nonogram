@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import * as commentActions from "../../store/comments";
 
-function PostComment() {
+function PostCommentFromFeed({image}) {
 
   const dispatch = useDispatch()
   const history = useHistory()
   const { id } = useParams() //Image ID
-  console.log('TEST', id)
+  // console.log('HI', image)
+
   const sessionUser = useSelector(state => state.session.user)
   const images = useSelector(state => state.images)
 
@@ -29,15 +30,15 @@ function PostComment() {
 
     setHasSubmitted(true);
 
-    if(errors.length > 0) return;
+    if (errors.length > 0) return;
 
     const new_comment = {
       userId: sessionUser.id,
-      imageId: images[id].id,
+      imageId: image.id,
       comment,
     }
 
-    await dispatch(commentActions.addCommentThunk(new_comment, images[id].id))
+    await dispatch(commentActions.addCommentThunk(new_comment, image.id))
     setComment('')
   }
 
@@ -63,4 +64,4 @@ function PostComment() {
 
 }
 
-export default PostComment
+export default PostCommentFromFeed

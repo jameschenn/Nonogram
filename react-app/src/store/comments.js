@@ -36,7 +36,6 @@ export const loadCommentsThunk = id => async dispatch => {
 }
 
 export const addCommentThunk = (payload, id) => async dispatch => {
-  console.log('THUNK', id )
   const result = await fetch(`/api/comments/${id}/comments`, {
     method: 'POST',
     headers: {

@@ -51,8 +51,9 @@ const IndividualImage = () => {
   let like = likes?.find((like) => {
     return user.id === like.userId
   })
-
-
+  console.log('og', likes)
+  //session user id = like arr user id. get specific like in all likes
+  console.log('what dis', like)
   const handleLike =  e => {
     e.preventDefault()
     if(like) {
