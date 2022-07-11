@@ -44,7 +44,6 @@
 .all-images-comments {
   word-break: break-all;
   width: 650px;
-
 }
 
 .img-feed-card img {
@@ -55,4 +54,48 @@
   width: 100%;
   object-fit: contain;
   vertical-align: bottom;
+}
+
+.individual-likes-and-comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.all-image-comments {
+  margin-left: 15px;
+}
+
+.post-comment {
+  width: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-top: solid 1px lightgray;
+  padding-top: 15px;
+}
+
+.post-comment form {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-comment input {
+  width: 100vh;
+  height: 1.2rem;
+}
+
+.post-comment button {
+  border: none;
+  background-color: white;
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+
+.post-comment li {
+  display: flex;
+  justify-content: center;
 }
