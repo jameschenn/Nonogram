@@ -27,18 +27,6 @@ const AllImages = () => {
     await dispatch(likeActions.loadLikesThunk())
   }, [dispatch, id])
 
-  // console.log('imageData', imageData)
-
-  // const likes = allLikesArr.filter((like) => {
-  //   imageData.forEach(image => {
-
-  //     return like?.imageId === like
-  //   })
-  //   console.log('loop',image)
-
-  // })
-
-
 
   return (
     <>
@@ -50,45 +38,46 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
 
-        {/* {console.log('loop', image)} */}
+
+        {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this.
+
           <div className="individual-likes-and-comment">
+            <div>
+              {image?.likes.find(plzWork => {
+                return plzWork.userId === sessionUser.id
+              }) ? (
 
-{/*
+                <button onClick={() => {
 
+                  let likes = allLikesArr.filter(like => {
+                    return like?.imageId === image.id
+                  })
 
-            {like ? (
+                  let like = likes?.find(like => {
+                    return sessionUser.id === like?.userId
+                  })
+
+                  dispatch(likeActions.deleteLikeThunk(like?.id))
+                }}>❤️</button>
               ) : (
-                )} */}
 
-              <button onClick={() => {
-
-                let likes = allLikesArr.filter(like => {
-                  return like?.imageId === image.id
-                })
-
-                let like = likes?.find(plzwork => {
-                  return sessionUser.id === plzwork?.userId
-                })
-
-
-
-                dispatch(likeActions.deleteLikeThunk(like?.id))
-              }}>❤️</button>
-              <button onClick={() => {
-                dispatch(likeActions.postLikeThunk(image?.id))
-              }}>🤍</button>
-          </div>
+                <button onClick={() => {
+                  dispatch(likeActions.postLikeThunk(image?.id))
+                }}>🤍</button>
+              )}
+            </div>
+            <div className="all-images-likes">
+              <li>{image?.likes.length} likes</li>
+            </div>
+          </div> */}
 
 
 
-        <div className="all-images-likes">
-          <li>{image?.likes.length} likes</li>
-        </div>
         <div className="all-images-comments">
           <li> <a href={`/users/${image.userId}`}><span style={{ fontWeight: 'bold', marginLeft: '10px', marginRight: '15px', marginBottom: '5px' }}>{image?.user?.username}</span></a> {image?.caption}</li>
         </div>
         <div className="all-images-comments">
-         <li>{image?.comments}</li>
+            <li style={{marginLeft:'10px'}}><a href={`/images/${image.id}`} style={{color:'lightslategray'}}>View all comments...</a></li>
         </div>
         </ul>
         <div className="post-comment">

@@ -6,12 +6,8 @@ import * as commentActions from "../../store/comments";
 function PostCommentFromFeed({image}) {
 
   const dispatch = useDispatch()
-  const history = useHistory()
-  const { id } = useParams() //Image ID
-  // console.log('HI', image)
 
   const sessionUser = useSelector(state => state.session.user)
-  const images = useSelector(state => state.images)
 
 
   const [comment, setComment] = useState('')
@@ -53,6 +49,7 @@ function PostCommentFromFeed({image}) {
         <div>
           <input
             type='text'
+            placeholder="Add a comment..."
             value={comment}
             onChange={e => setComment(e.target.value)}
           />
