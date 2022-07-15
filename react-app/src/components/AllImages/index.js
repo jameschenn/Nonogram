@@ -19,8 +19,10 @@ const AllImages = () => {
   const imageData = Object.values(images)
   const comments = useSelector(state => state.comments)
   const allLikes = useSelector(state => state.likes);
-  const allLikesArr = Object.values(allLikes)
+  const allLikesArr = Object.values(allLikes);
 
+  console.log('image data', imageData)
+  console.log('likes arr', allLikesArr);
 
   useEffect(async () => {
     await dispatch(imageActions.loadAllImagesThunk())
@@ -39,14 +41,12 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
 
-{        console.log('image', image?.createdAt)
-}
-        {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this.
+        {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this. */}
 
           <div className="individual-likes-and-comment">
             <div>
-              {image?.likes.find(plzWork => {
-                return plzWork.userId === sessionUser.id
+              {image?.likes.find(like => {
+                return like.userId === sessionUser.id
               }) ? (
 
                 <button onClick={() => {
@@ -71,7 +71,7 @@ const AllImages = () => {
             <div className="all-images-likes">
               <li>{image?.likes.length} likes</li>
             </div>
-          </div> */}
+          </div>
 
 
 
