@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import moment from "moment";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments'
 import * as likeActions from '../../store/likes';
@@ -18,8 +19,10 @@ const AllImages = () => {
   const imageData = Object.values(images)
   const comments = useSelector(state => state.comments)
   const allLikes = useSelector(state => state.likes);
-  const allLikesArr = Object.values(allLikes)
+  const allLikesArr = Object.values(allLikes);
 
+  console.log('image data', imageData)
+  console.log('likes arr', allLikesArr);
 
   useEffect(async () => {
     await dispatch(imageActions.loadAllImagesThunk())
@@ -38,13 +41,12 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
 
-
-        {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this.
+        {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this. */}
 
           <div className="individual-likes-and-comment">
             <div>
-              {image?.likes.find(plzWork => {
-                return plzWork.userId === sessionUser.id
+              {image?.likes.find(like => {
+                return like.userId === sessionUser.id
               }) ? (
 
                 <button onClick={() => {
@@ -69,7 +71,7 @@ const AllImages = () => {
             <div className="all-images-likes">
               <li>{image?.likes.length} likes</li>
             </div>
-          </div> */}
+          </div>
 
 
 
@@ -78,6 +80,9 @@ const AllImages = () => {
         </div>
         <div className="all-images-comments">
             <li style={{marginLeft:'10px'}}><a href={`/images/${image.id}`} style={{color:'lightslategray'}}>View all comments...</a></li>
+        </div>
+        <div>
+            <li style={{ marginLeft: '10px' }}>{moment(image?.createdAt).fromNow()}</li>
         </div>
         </ul>
         <div className="post-comment">
