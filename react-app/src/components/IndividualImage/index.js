@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import ClipLoader from "react-spinners/ClipLoader";
+import moment from "moment";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments';
 import * as likeActions from '../../store/likes';
@@ -133,6 +134,9 @@ const IndividualImage = () => {
                       </>
                     )}
                   </Popup>
+                  <div>
+                    <li style={{ marginTop: '10px', listStyleType: 'none' }}>{moment(imageData?.createdAt).fromNow()}</li>
+                  </div>
                 <div className="individual-post-comment">
                   <PostComment />
                 </div>

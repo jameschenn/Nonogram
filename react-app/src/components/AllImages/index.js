@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import moment from "moment";
 import * as imageActions from '../../store/images';
 import * as commentActions from '../../store/comments'
 import * as likeActions from '../../store/likes';
@@ -38,7 +39,8 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
 
-
+{        console.log('image', image?.createdAt)
+}
         {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this.
 
           <div className="individual-likes-and-comment">
@@ -78,6 +80,9 @@ const AllImages = () => {
         </div>
         <div className="all-images-comments">
             <li style={{marginLeft:'10px'}}><a href={`/images/${image.id}`} style={{color:'lightslategray'}}>View all comments...</a></li>
+        </div>
+        <div>
+            <li style={{ marginLeft: '10px' }}>{moment(image?.createdAt).fromNow()}</li>
         </div>
         </ul>
         <div className="post-comment">
