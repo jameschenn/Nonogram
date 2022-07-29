@@ -54,7 +54,6 @@ const SearchBar = () => {
         {searchResults.map(result => (
           <>
           <div className='search-result'>
-            {console.log('RESULT', result)}
             <a href={`/images/${result.id}`}>
               <ul style={{ marginLeft:"25px", borderBottom: "solid 1px lightgray"}}>
                 <li style={{marginRight:'15px'}}>{result.caption}</li>

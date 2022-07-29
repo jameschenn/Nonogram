@@ -143,7 +143,6 @@ export const signUp = (new_user) => async dispatch => {
 export const editUserThunk = user => async dispatch => {
 
   const { userId, firstName, lastName, bio, image} = user
-  console.log('FROM THE THUNK', userId, firstName, lastName, bio, image)
   const formData = new FormData();
 
   formData.append('firstName', firstName)
