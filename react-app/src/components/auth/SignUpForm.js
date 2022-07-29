@@ -94,7 +94,6 @@ const SignUpForm = () => {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
-    console.log('FILE', file)
     setImage(file);
   }
 

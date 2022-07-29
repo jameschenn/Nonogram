@@ -45,6 +45,7 @@ function UploadImage() {
 
   const updateImage = (e) => {
     const file = e.target.files[0];
+    console.log(file)
     setDisabled(false)
     setImage(file);
   }
@@ -91,7 +92,7 @@ function UploadImage() {
             />
           </div>
           <div className='upload-buttons'>
-            {console.log('DISABLED', disabled)}
+            {/* {console.log('DISABLED', disabled)} */}
           <button type='submit' disabled={disabled}>Post image</button>
           <button type="button" onClick={handleCancelClick}>Cancel</button>
           </div>
