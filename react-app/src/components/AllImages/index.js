@@ -38,6 +38,7 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
 
+      <div className='test-container'>
           <div className="individual-likes-and-comment">
             <div>
               {image?.likes.find(like => {
@@ -60,15 +61,14 @@ const AllImages = () => {
 
                 <button onClick={() => {
                   dispatch(likeActions.postLikeThunk(image?.id))
-                  // dispatch(imageActions.addLikeThunk())
                 }}>🤍</button>
               )}
             </div>
-            <div className="all-images-likes">
+            {/* <div className="all-images-likes">
               <li>{image?.likes.length} likes</li>
-            </div>
+            </div> */}
           </div>
-
+      </div>
 
 
         <div className="all-images-comments">

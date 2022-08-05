@@ -58,12 +58,17 @@
 
 .individual-likes-and-comment {
   display: flex;
-  flex-direction: column;
+  flex-direction: col;
+  justify-content: center;
 }
 
 .all-image-comments {
   margin-left: 15px;
 }
+
+/* .all-images-likes {
+  font-weight: bold;
+} */
 
 .post-comment {
   width: 45rem;
