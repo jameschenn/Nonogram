@@ -38,8 +38,6 @@ const AllImages = () => {
           <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
         </div>
 
-        {/* Everything working, however the frontend is not updating dynamically because it's nested. I will come back to this.
-
           <div className="individual-likes-and-comment">
             <div>
               {image?.likes.find(like => {
@@ -56,19 +54,20 @@ const AllImages = () => {
                     return sessionUser.id === like?.userId
                   })
 
-                  dispatch(likeActions.deleteLikeThunk(like?.id))
+                  dispatch(likeActions.deleteLikeThunk(like))
                 }}>❤️</button>
               ) : (
 
                 <button onClick={() => {
                   dispatch(likeActions.postLikeThunk(image?.id))
+                  // dispatch(imageActions.addLikeThunk())
                 }}>🤍</button>
               )}
             </div>
             <div className="all-images-likes">
               <li>{image?.likes.length} likes</li>
             </div>
-          </div> */}
+          </div>
 
 
 

@@ -56,7 +56,7 @@ const IndividualImage = () => {
   const handleLike =  e => {
     e.preventDefault()
     if(like) {
-      dispatch(likeActions.deleteLikeThunk(like?.id))
+      dispatch(likeActions.deleteLikeThunk(like))
     } else {
       dispatch(likeActions.postLikeThunk(imageData?.id))
     }
