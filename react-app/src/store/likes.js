@@ -1,3 +1,5 @@
+import { addLikeThunk, deleteImageLikeThunk } from "./images";
+
 const LOAD = 'likes/LOAD';
 const POST_LIKE = 'likes/POST_LIKE';
 const DELETE_LIKE = 'likes/DELETE_LIKE';
@@ -43,15 +45,17 @@ export const postLikeThunk = id => async dispatch => {
   if (response.ok) {
     const data = await response.json();
     dispatch(postLike(data))
+    dispatch(addLikeThunk(data))
   }
 }
 
-export const deleteLikeThunk = id => async dispatch => {
-  const response = await fetch(`/api/likes/${id}`, {
+export const deleteLikeThunk = (like) => async dispatch => {
+  const response = await fetch(`/api/likes/${like.id}`, {
     method: 'DELETE'
   });
   if(response.ok) {
-    dispatch(deleteLike(id))
+    dispatch(deleteLike(like.id))
+    dispatch(deleteImageLikeThunk(like))
   }
 }
 

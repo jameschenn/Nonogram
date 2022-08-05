@@ -6,6 +6,9 @@ const ADD_IMAGE = 'images/ADD_IMAGE';
 const EDIT_IMAGE = 'images/EDIT_IMAGE';
 const DELETE_IMAGE = 'images/DELETE_IMAGE';
 
+const ADD_LIKE = 'images/ADD_LIKE';
+const DELETE_LIKE = 'images/DELETE_LIKE';
+
 const CLEAR_STORE = 'images/CLEAR_STORE';
 
 const clearStore = () => ({
@@ -50,6 +53,25 @@ const deleteImage = image => ({
   type: DELETE_IMAGE,
   image
 })
+
+
+const addLike = like => ({
+  type: ADD_LIKE,
+  like
+});
+
+const deleteLike = like => ({
+  type: DELETE_LIKE,
+  like
+});
+
+export const addLikeThunk = like => dispatch => {
+  dispatch(addLike(like))
+}
+
+export const deleteImageLikeThunk = like => dispatch => {
+  dispatch(deleteLike(like))
+}
 
 export const loadAllImagesThunk = () => async dispatch => {
   const result = await fetch('/api/images/', {
@@ -163,15 +185,15 @@ const imagesReducer = (state = initalState, action) => {
         ...state,
         ...allImages
       };
-      case LOAD_USER_IMAGES:
+    case LOAD_USER_IMAGES:
         const newState = {}
         action.image.images.forEach(image => {
-        newState[image.id] = image;
-      });
-      return {
-        ...state,
-        ...newState
-      };
+          newState[image.id] = image;
+        });
+        return {
+          ...state,
+          ...newState
+        };
     case ADD_IMAGE:
       const newImage = {};
       newImage[action.image.image.id] = action.image.image;
@@ -190,6 +212,29 @@ const imagesReducer = (state = initalState, action) => {
       };
       delete deletedState[action.image];
       return deletedState
+
+    case ADD_LIKE:
+      const image = state[action.like.imageId];
+      // image.likes = {
+      //   ...image.likes,
+      //   [action.like.id]: action.like
+      // }
+      image.likes.push(action.like);
+      return {
+       ...state,
+      //  [image.id]: {...image}
+      }
+
+    case DELETE_LIKE:
+      const image2 = state[action.like.imageId];
+      console.log('reducer', image2)
+      console.log('reducer2', action.like)
+      image2.likes.splice(image2.likes.indexOf(action.like), 1);
+      return {
+        ...state
+      }
+
+
 
     case CLEAR_STORE:
       return {}
