@@ -12,6 +12,10 @@ ENV FLASK_ENV=production
 ENV SQLALCHEMY_ECHO=true
 # Set the directory for upcoming commands to /var/www
 WORKDIR /var/www
+# Install Python development headers
+RUN apt-get update && apt-get install -y python3-dev
+# Upgrade pip to a specific version
+RUN pip install --upgrade pip==23.3.2
 # Copy all the files from your repo to the working directory
 COPY . .
 # Copy the built react app (it's built for us) from the
