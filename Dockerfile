@@ -14,6 +14,8 @@ ENV SQLALCHEMY_ECHO=true
 WORKDIR /var/www
 # Install Python development headers
 RUN apt-get update && apt-get install -y python3-dev
+# Install system dependencies for greenlet and psycopg2
+RUN apt-get install -y libffi-dev libpq-dev
 # Upgrade pip
 RUN pip install --upgrade pip
 # Copy all the files from your repo to the working directory
