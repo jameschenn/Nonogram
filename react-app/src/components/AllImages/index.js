@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import moment from "moment";
@@ -33,9 +34,11 @@ const AllImages = () => {
     {imageData.reverse().map((image, idx) => (
       <div className='img-feed-card'>
         <ul>
-          <li><a href={`/users/${image.userId}`}><img src={image?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{ marginLeft: '25px' }} /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{image?.user?.username}</span></a></li>
+          {/* <li><a href={`/users/${image.userId}`}><img src={image?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{ marginLeft: '25px' }} /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{image?.user?.username}</span></a></li> */}
+          <NavLink to={`/users/${image.userId}`} activeClassName='active'><img src={image?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{ marginLeft: '25px' }} /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{image?.user?.username}</span></NavLink>
         <div className="all-image-container">
-          <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li>
+          {/* <li><a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id}/></a></li> */}
+          <NavLink to={`/images/${image.id}`} activeClassName='active'><img src={image?.imageUrl} alt={image?.id}/></NavLink>
         </div>
 
       <div className='test-container'>
