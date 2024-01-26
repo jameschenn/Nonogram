@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
@@ -79,7 +80,8 @@ const LoginForm = () => {
       <div className='new-container'>
         <div className='login-new'>
           <p style={{marginRight: '7px'}}>New User?</p>
-          <a href={`/sign-up`}>Sign up!</a>
+          {/* <a href={`/sign-up`}>Sign up!</a> */}
+          <NavLink to={`/sign-up`}>Sign up!</NavLink>
         </div>
     </div>
     </>

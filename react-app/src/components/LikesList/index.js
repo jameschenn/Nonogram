@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as imageActions from '../../store/images'
 import { loadLikesThunk } from "../../store/likes";
 
@@ -33,8 +33,9 @@ const LikesList = () => {
     <div className='likes-list'>
     {imageLikes.map(like => (
       <ul>
-        <a href={`/users/${like?.user?.id}`}><li><img src={like?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{like?.user?.username}</span></li></a>
-      </ul>
+        {/* <a href={`/users/${like?.user?.id}`}><li><img src={like?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{like?.user?.username}</span></li></a> */}
+        <NavLink to={`/users/${like?.user?.id}`}><li><img src={like?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '15px' }}>{like?.user?.username}</span></li></NavLink>
+     </ul>
     ))}
     </div>
     </>

@@ -73,8 +73,10 @@ const NavBar = () => {
           <div class='profile-dropdown'>
                   <button><img src={sessionUser?.profilePictureUrl} alt={sessionUser?.username} style={{cursor: 'grabbing'}} /></button>
               <div class="dropdown-content">
-                    <a href={`/me`}>Profile <i class="fa-solid fa-user"></i></a>
-                    <a href={`/me/edit`}>Settings <i class="fa-solid fa-gear"></i></a>
+                    {/* <a href={`/me`}>Profile <i class="fa-solid fa-user"></i></a> */}
+                    <NavLink to={`/me`} activeClassName='active'><i class="fa-solid fa-user"></i></NavLink>
+                    {/* <a href={`/me/edit`}>Settings <i class="fa-solid fa-gear"></i></a> */}
+                    <NavLink to={`/me/edit`} activeClassName='active'>Settings <i class="fa-solid fa-gear"></i></NavLink>
                 <LogoutButton />
               </div>
           </div>

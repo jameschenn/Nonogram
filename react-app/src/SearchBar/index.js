@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { loadSearchThunk } from '../store/search';
 import './searchbar.css'
@@ -54,12 +55,13 @@ const SearchBar = () => {
         {searchResults.map(result => (
           <>
           <div className='search-result'>
-            <a href={`/images/${result.id}`}>
+            {/* <a href={`/images/${result.id}`}> */}
+            <NavLink to={`/images/${result.id}`}>
               <ul style={{ marginLeft:"25px", borderBottom: "solid 1px lightgray"}}>
                 <li style={{marginRight:'15px'}}>{result.caption}</li>
                   <li>Posted by <span style={{fontWeight:'bold'}}>{result?.user?.username}</span></li>
               </ul>
-            </a>
+            </NavLink>
           </div>
           </>
         ))}

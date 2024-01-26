@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import ClipLoader from "react-spinners/ClipLoader";
 import moment from "moment";
@@ -78,7 +78,8 @@ const IndividualImage = () => {
               <img src={imageData?.imageUrl} alt='post' />
             </div>
             <div className='post-info'>
-              <p><a href={`/users/${imageData?.userId}`}><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{marginRight: '10px'}} /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span></a>
+              {/* <p><a href={`/users/${imageData?.userId}`}><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{marginRight: '10px'}} /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span></a> */}
+              <p><NavLink to={`/users/${imageData?.userId}`}><img src={imageData?.user?.profilePictureUrl} alt='profile-icon' className='profile-icon' style={{marginRight: '10px'}} /> <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{imageData?.user?.username}</span></NavLink>
                 {user?.id === imageData?.userId && (
                   <>
                     <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
@@ -102,7 +103,8 @@ const IndividualImage = () => {
               <div className='individual-comments'>
                 {commentsData.map((comment, idx) => (
                   <ul>
-                    <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{comment.user.username}</span></a> <span>{comment.comment}</span> {user?.id === comment?.userId && (
+                    {/* <li> <a href={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{comment.user.username}</span></a> <span>{comment.comment}</span> {user?.id === comment?.userId && ( */}
+                    <li> <NavLink to={`/users/${comment?.userId}`}><img src={comment.user.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>{comment.user.username}</span></NavLink> <span>{comment.comment}</span> {user?.id === comment?.userId && (
                       <>
                         <Popup trigger={<i class="fa-solid fa-ellipsis"></i>} position="right center">
                           {close => (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom'; 
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -199,7 +200,8 @@ const SignUpForm = () => {
   <div className='new-container'>
     <div className='login-new'>
       <p style={{marginRight:'10px', marginLeft:'-5px'}}>Already had an account?</p>
-          <a href={`/login`}>Log in!</a>
+          {/* <a href={`/login`}>Log in!</a> */}
+          <NavLink to={`/login`}>Log in!</NavLink>
     </div>
   </div>
   </>

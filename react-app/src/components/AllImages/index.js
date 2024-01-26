@@ -75,10 +75,12 @@ const AllImages = () => {
 
 
         <div className="all-images-comments">
-          <li> <a href={`/users/${image.userId}`}><span style={{ fontWeight: 'bold', marginLeft: '10px', marginRight: '15px', marginBottom: '5px' }}>{image?.user?.username}</span></a> {image?.caption}</li>
+          {/* <li> <a href={`/users/${image.userId}`}><span style={{ fontWeight: 'bold', marginLeft: '10px', marginRight: '15px', marginBottom: '5px' }}>{image?.user?.username}</span></a> {image?.caption}</li> */}
+          <li><NavLink to={`/users/${image.userId}`} activeClassName='active'><span style={{ fontWeight: 'bold', marginLeft: '10px', marginRight: '15px', marginBottom: '5px' }}>{image?.user?.username}</span></NavLink> {image?.caption}</li>
         </div>
         <div className="all-images-comments">
-            <li style={{marginLeft:'10px'}}><a href={`/images/${image.id}`} style={{color:'lightslategray'}}>View all comments...</a></li>
+            {/* <li style={{marginLeft:'10px'}}><a href={`/images/${image.id}`} style={{color:'lightslategray'}}>View all comments...</a></li> */}
+            <li style={{marginLeft:'10px'}}><NavLink to={`/images/${image.id}`} style={{color:'lightslategray'}}>View all comments...</NavLink></li>
         </div>
         <div>
             <li style={{ marginLeft: '10px' }}>{moment(image?.createdAt).fromNow()}</li>

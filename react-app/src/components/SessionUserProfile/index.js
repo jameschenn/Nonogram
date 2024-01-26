@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import * as imageActions from '../../store/images';
 import '../UserProfile/UserProfile.css'
@@ -38,7 +38,8 @@ const SessionUserProfile = () => {
                 <p style={{ fontWeight: 'bold', borderBottom: 'solid 1px lightgray', marginRight: '5px' }}>Followers</p>
                 {sessionUser.followers.map(follower => (
                   <ul className='follows-list'>
-                    <a href={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></a>
+                    {/* <a href={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></a> */}
+                    <NavLink to={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></NavLink>
                   </ul>
                 ))}
               </>
@@ -51,7 +52,8 @@ const SessionUserProfile = () => {
                 <p style={{ fontWeight: 'bold', borderBottom: 'solid 1px lightgray', marginRight: '5px' }}>Following</p>
                 {sessionUser.following.map(follower => (
                   <ul className='follows-list'>
-                    <a href={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></a>
+                    {/* <a href={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></a> */}
+                    <NavLink to={`/users/${follower.id}`}><li><img src={follower?.profilePictureUrl} alt='profile-icon' className='profile-icon' /> <span style={{ color: 'black', fontWeight: 'bold', marginLeft: '15px' }}>{follower.username}</span></li></NavLink>
                   </ul>
                 ))}
               </>
@@ -68,7 +70,8 @@ const SessionUserProfile = () => {
         {imageData.reverse().map((image, idx) => (
           <ul>
             <div className='profile-img-cards'>
-              <a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id} /></a>
+              {/* <a href={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id} /></a> */}
+              <NavLink to={`/images/${image.id}`}><img src={image?.imageUrl} alt={image?.id} /></NavLink>
             </div>
           </ul>
         ))}
