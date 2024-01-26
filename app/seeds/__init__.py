@@ -10,38 +10,10 @@ from .follows import seed_follows, undo_follows
 seed_commands = AppGroup('seed')
 
 
-# # Creates the `flask seed all` command
-# @seed_commands.command('all')
-# def seed():
-#     seed_users()
-#     # Add other seed functions here
-#     seed_images()
-#     seed_comments()
-#     seed_likes()
-#     seed_follows()
-
-
-# # Creates the `flask seed undo` command
-# @seed_commands.command('undo')
-# def undo():
-#     undo_users()
-#     # Add other undo functions here
-#     undo_images()
-#     undo_comments()
-#     undo_likes()
-#     undo_follows()
-
-
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
-    if environment == 'production':
-        undo_users()
-        undo_images()
-        undo_comments()
-        undo_likes()
-        undo_follows()
-
+    undo()
     seed_users()
     # Add other seed functions here
     seed_images()
